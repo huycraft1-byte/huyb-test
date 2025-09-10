@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tai nghe chụp tai Gaming Havit HV‑H2232D – Giá tốt</title>
+  <meta name="description" content="Tai nghe gaming Havit HV‑H2232D – jack 3.5mm, đeo êm, micro rõ. Giá chỉ 340.000đ (giảm từ 480.000đ). Ship COD toàn quốc, 1 đổi 1 trong 15 ngày nếu lỗi NSX." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:"Inter",sans-serif;background:#0b0f19;color:#e5e7eb}
+    img{max-width:100%;display:block}
+    .container{max-width:1140px;margin:auto;padding:16px}
+    .hero{display:grid;gap:20px;align-items:center;padding:40px 0}
+    @media(min-width:768px){.hero{grid-template-columns:1fr 1fr}}
+    .btn{background:#ef4444;color:#fff;padding:12px 20px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
+    .price{display:flex;gap:12px;align-items:flex-end;margin:12px 0}
+    .price-now{font-size:32px;font-weight:800;color:#fff}
+    .price-old{text-decoration:line-through;color:#9ca3af}
+    .gallery{display:grid;gap:12px}
+    @media(min-width:768px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .card{background:#12172a;padding:20px;border-radius:12px}
+    form{display:grid;gap:12px}
+    input,select,textarea{padding:10px;border-radius:8px;border:1px solid #374151;background:#0b1224;color:#e5e7eb}
+  </style>
+  <script>
+    function handleSubmit(e){
+      e.preventDefault();
+      const form=e.target;
+      const name=form.name.value;
+      const phone=form.phone.value;
+      const address=form.address.value;
+      if(!name||!phone||!address){alert('Vui lòng nhập đủ Họ tên, SĐT và Địa chỉ');return}
+      alert('Đặt hàng thành công! Shop sẽ liên hệ xác nhận.');
+      form.reset();
+    }
+  </script>
+</head>
+<body>
+  <header class="hero container">
+    <div>
+      <h1>Tai nghe Gaming Havit HV‑H2232D</h1>
+      <p>Âm thanh sống động, micro rõ ràng, thiết kế LED RGB nổi bật. Kết nối jack 3.5mm, đeo êm cả ngày.</p>
+      <div class="price">
+        <div class="price-now">340.000đ</div>
+        <div class="price-old">480.000đ</div>
+      </div>
+      <button class="btn" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Đặt mua ngay</button>
+    </div>
+    <div>
+      <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-chup-tai-gaming-havit-hv-h2233d-ksp-1.png" alt="Tai nghe Havit HV-H2232D">
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>Lợi ích chính</h2>
+    <div class="card">Driver 50mm cho âm thanh mạnh mẽ, rõ ràng.</div>
+    <div class="card">Micro khử ồn, voice chat/game/học online đều rõ.</div>
+    <div class="card">Thiết kế đệm tai êm ái, đeo lâu không đau tai.</div>
+    <div class="card">LED RGB cá tính cho game thủ.</div>
+  </section>
+
+  <section class="container">
+    <h2>Hình ảnh sản phẩm</h2>
+    <div class="gallery">
+      <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/h/a/havit_hv-h2232d_3.png" alt="Tai nghe Havit HV-H2232D góc 1">
+      <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/h/a/havit_hv-h2232d_4.png" alt="Tai nghe Havit HV-H2232D góc 2">
+      <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/h/a/havit_hv-h2232d_1.png" alt="Tai nghe Havit HV-H2232D góc 3">
+      <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/h/a/havit_hv-h2232d_2.png" alt="Tai nghe Havit HV-H2232D góc 4">
+    </div>
+  </section>
+
+  <section id="order" class="container">
+    <h2>Đặt hàng ngay</h2>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" name="name" placeholder="Họ và tên" required>
+      <input type="tel" name="phone" placeholder="Số điện thoại" required>
+      <input type="text" name="address" placeholder="Địa chỉ nhận hàng" required>
+      <textarea name="note" placeholder="Ghi chú (màu sắc, thời gian nhận hàng...)"></textarea>
+      <button type="submit" class="btn">Xác nhận đặt hàng (COD)</button>
+    </form>
+    <p style="margin-top:8px;color:#9ca3af">1 đổi 1 trong 15 ngày nếu lỗi NSX. Ship COD toàn quốc.</p>
+  </section>
+
+  <footer class="container" style="margin-top:40px;border-top:1px solid #374151;padding-top:20px;color:#9ca3af">
+    © 2025 YourShop. Hotline: 09xx xxx xxx | Email: support@yourshop.vn
+  </footer>
+</body>
+</html>
