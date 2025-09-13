@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        /* CSS VẪN GIỮ NGUYÊN */
         :root {
             --color-primary: #ff4d4d;
             --color-dark: #000000;
@@ -375,20 +374,22 @@
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         
-        // --- VÔ HIỆU HÓA TẤT CẢ SLIDER ĐỂ KIỂM TRA ---
-
-        /*
-        // --- 1. HERO GALLERY ---
+        // --- 1. HERO GALLERY (FIXED INITIALIZATION) ---
         const imageCounter = document.querySelector('.image-counter');
+        
+        // Step 1: Initialize the thumbnails slider first and store it in a variable.
+        const galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+
+        // Step 2: Initialize the main slider and link it to the thumbs instance.
         const galleryMain = new Swiper('.gallery-main', {
             spaceBetween: 10,
             thumbs: {
-                swiper: new Swiper('.gallery-thumbs', {
-                    spaceBetween: 10,
-                    slidesPerView: 4,
-                    freeMode: true,
-                    watchSlidesProgress: true,
-                }),
+                swiper: galleryThumbs, // Pass the variable here, NOT a new instance
             },
             on: {
                 slideChange: function () {
@@ -397,7 +398,7 @@
             }
         });
         
-        // --- VIDEO SLIDER ---
+        // --- 2. VIDEO SLIDER (RE-ENABLED WITH FIXES) ---
         const isMobile = window.innerWidth < 768;
         const videoSlider = new Swiper('.video-slider', {
             slidesPerView: 1.2,
@@ -409,10 +410,45 @@
             breakpoints: {
                 768: { slidesPerView: 2, spaceBetween: 20 },
                 960: { slidesPerView: 3, spaceBetween: 30 }
+            },
+            on: {
+                slideChange: function (swiper) {
+                    swiper.slides.forEach((slide) => {
+                        const video = slide.querySelector('video');
+                        if (video) {
+                           video.pause();
+                           slide.classList.remove('playing');
+                        }
+                    });
+
+                    if (!isMobile) {
+                        const activeSlide = swiper.slides[swiper.activeIndex];
+                        const activeVideo = activeSlide.querySelector('video');
+                        if (activeVideo) {
+                            const playPromise = activeVideo.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(error => {
+                                    console.warn("Autoplay was prevented", error);
+                                });
+                            }
+                        }
+                    }
+                }
             }
         });
 
-        // --- REVIEW SLIDER ---
+        document.querySelectorAll('.video-slide').forEach(slide => {
+            const video = slide.querySelector('video');
+            const playButton = slide.querySelector('.play-button');
+            function togglePlay() {
+                if (video.paused) { video.play(); slide.classList.add('playing'); } 
+                else { video.pause(); slide.classList.remove('playing'); }
+            }
+            playButton.addEventListener('click', togglePlay);
+            if (isMobile) { video.addEventListener('click', togglePlay); }
+        });
+
+        // --- 3. REVIEW SLIDER (RE-ENABLED) ---
         const reviewSlider = new Swiper('.review-slider', {
             slidesPerView: 1.05,
             spaceBetween: 15,
@@ -425,10 +461,8 @@
                 960: { slidesPerView: 3, spaceBetween: 30, centeredSlides: false }
             }
         });
-        */
-
-
-        // --- CHỈ ĐỂ LẠI CÁC PHẦN JS CƠ BẢN ---
+        
+        // --- 4. OTHER SCRIPTS ---
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
