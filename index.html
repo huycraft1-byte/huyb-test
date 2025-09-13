@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cặp lồng giữ nhiệt Kela Đức 1,2L</title>
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
     <style>
         :root {
@@ -73,15 +73,12 @@
         .review-card img { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover; }
         .review-card .name { font-weight: bold; }
         .review-card .stars { color: #fadb14; margin: 5px 0; }
-        
-        /* NEW VIDEO GRID STYLES */
         .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .video-thumbnail { position: relative; cursor: pointer; overflow: hidden; border-radius: var(--border-radius); box-shadow: var(--shadow); aspect-ratio: 9 / 16; }
         .video-thumbnail video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
         .video-thumbnail .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
         .video-thumbnail:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); }
         .play-icon svg { width: 30px; height: 30px; fill: var(--color-primary); }
-        
         .faq-item { border-bottom: 1px solid #eee; }
         .faq-question { padding: 15px 0; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-question::before { content: '❓'; margin-right: 10px; }
@@ -93,7 +90,7 @@
         .modal-content { background: var(--color-light); padding: 25px; border-radius: var(--border-radius); box-shadow: 0 5px 20px rgba(0,0,0,0.2); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s; }
         .modal-overlay.visible .modal-content { transform: scale(1); }
         .modal-close, .lightbox-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 20px; cursor: pointer; line-height: 30px; text-align: center; }
-        .lightbox-close { top: -15px; right: -15px; background: white; }
+        .lightbox-close { top: -15px; right: -15px; background: white; color: black; }
         .lightbox-content { position: relative; width: 90%; max-width: 800px; aspect-ratio: 16 / 9; }
         .lightbox-content video { width: 100%; height: 100%; border-radius: var(--border-radius); }
         .modal-content h2 { text-align: left; margin-bottom: 20px; }
@@ -383,12 +380,11 @@
     
     <div class="toast" id="toast-notification">✅ Cảm ơn bạn đã đặt hàng!</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
     <script>
     window.addEventListener('load', function () {
         
-        // --- 1. HERO GALLERY ---
         const imageCounter = document.querySelector('.image-counter');
         const galleryThumbs = new Swiper('.gallery-thumbs', {
             spaceBetween: 10,
@@ -402,13 +398,12 @@
                 swiper: galleryThumbs,
             },
             on: {
-                slideChange: function () {
-                    imageCounter.textContent = `${this.realIndex + 1} / ${this.slides.length}`;
+                slideChange: function (swiper) {
+                    imageCounter.textContent = `${swiper.realIndex + 1} / ${swiper.slides.length}`;
                 }
             }
         });
         
-        // --- 2. VIDEO LIGHTBOX ---
         const videoThumbnails = document.querySelectorAll('.video-thumbnail');
         const lightbox = document.getElementById('video-lightbox');
         const lightboxVideo = lightbox.querySelector('video');
@@ -425,7 +420,7 @@
         function closeLightbox() {
             lightbox.classList.remove('visible');
             lightboxVideo.pause();
-            lightboxVideo.src = ""; // Dừng tải video trong nền
+            lightboxVideo.src = "";
         }
 
         lightboxClose.addEventListener('click', closeLightbox);
@@ -435,7 +430,6 @@
             }
         });
 
-        // --- 3. REVIEW SLIDER ---
         const reviewSlider = new Swiper('.review-slider', {
             slidesPerView: 1.05,
             spaceBetween: 15,
@@ -449,7 +443,6 @@
             }
         });
         
-        // --- 4. OTHER SCRIPTS ---
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
