@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        /* CSS không thay đổi, giữ nguyên như cũ */
+        /* CSS VẪN GIỮ NGUYÊN */
         :root {
             --color-primary: #ff4d4d;
             --color-dark: #000000;
@@ -374,6 +374,10 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+        
+        // --- VÔ HIỆU HÓA TẤT CẢ SLIDER ĐỂ KIỂM TRA ---
+
+        /*
         // --- 1. HERO GALLERY ---
         const imageCounter = document.querySelector('.image-counter');
         const galleryMain = new Swiper('.gallery-main', {
@@ -393,8 +397,7 @@
             }
         });
         
-        /*
-        // --- TẠM THỜI VÔ HIỆU HÓA VIDEO SLIDER ĐỂ KIỂM TRA ---
+        // --- VIDEO SLIDER ---
         const isMobile = window.innerWidth < 768;
         const videoSlider = new Swiper('.video-slider', {
             slidesPerView: 1.2,
@@ -406,56 +409,10 @@
             breakpoints: {
                 768: { slidesPerView: 2, spaceBetween: 20 },
                 960: { slidesPerView: 3, spaceBetween: 30 }
-            },
-            on: {
-                init: function(swiper) {
-                    if (!isMobile) {
-                        const activeSlide = swiper.slides[swiper.activeIndex];
-                        const video = activeSlide.querySelector('video');
-                        if(video) {
-                           const playPromise = video.play();
-                            if (playPromise !== undefined) {
-                                playPromise.catch(error => console.warn("Autoplay prevented on init", error));
-                            }
-                        }
-                    }
-                },
-                slideChange: function (swiper) {
-                    swiper.slides.forEach((slide, index) => {
-                        const video = slide.querySelector('video');
-                        if (video) {
-                            if (index === swiper.activeIndex && !isMobile) {
-                                slide.classList.add('playing');
-                                const playPromise = video.play();
-                                if (playPromise !== undefined) {
-                                    playPromise.catch(error => {
-                                        console.warn("Autoplay was prevented on slide change", error);
-                                        slide.classList.remove('playing');
-                                    });
-                                }
-                            } else {
-                                video.pause();
-                                slide.classList.remove('playing');
-                            }
-                        }
-                    });
-                }
             }
         });
 
-        document.querySelectorAll('.video-slide').forEach(slide => {
-            const video = slide.querySelector('video');
-            const playButton = slide.querySelector('.play-button');
-            function togglePlay() {
-                if (video.paused) { video.play(); slide.classList.add('playing'); } 
-                else { video.pause(); slide.classList.remove('playing'); }
-            }
-            playButton.addEventListener('click', togglePlay);
-            if (isMobile) { video.addEventListener('click', togglePlay); }
-        });
-        */
-
-        // --- REVIEW SLIDER (FIXED) ---
+        // --- REVIEW SLIDER ---
         const reviewSlider = new Swiper('.review-slider', {
             slidesPerView: 1.05,
             spaceBetween: 15,
@@ -468,8 +425,10 @@
                 960: { slidesPerView: 3, spaceBetween: 30, centeredSlides: false }
             }
         });
+        */
 
-        // --- CÁC PHẦN KHÁC GIỮ NGUYÊN ---
+
+        // --- CHỈ ĐỂ LẠI CÁC PHẦN JS CƠ BẢN ---
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
