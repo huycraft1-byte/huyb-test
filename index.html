@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        /* --- STYLE GUIDE & RESET --- */
+        /* CSS không thay đổi, giữ nguyên như cũ */
         :root {
             --color-primary: #ff4d4d;
             --color-dark: #000000;
@@ -29,8 +29,6 @@
         img { max-width: 100%; height: auto; display: block; }
         .cta-button { display: inline-block; background-color: var(--color-primary); color: var(--color-light); font-size: 18px; font-weight: bold; text-align: center; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; width: 100%; transition: transform 0.2s, box-shadow 0.2s; }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(255, 77, 77, 0.4); }
-
-        /* --- 1. HERO SECTION --- */
         .hero-section { background-color: var(--color-grey); padding-top: 30px; }
         .hero-section .container { display: flex; flex-direction: column; gap: 30px; }
         .product-gallery { flex: 1; position: relative; }
@@ -49,29 +47,23 @@
         .product-info .usp-quick { background-color: #fffbe6; border: 1px solid #ffe58f; border-radius: 8px; padding: 10px 15px; font-size: 14px; margin-bottom: 20px; }
         .countdown { text-align: center; margin-top: 15px; font-size: 16px; font-weight: bold; }
         .countdown span { background-color: var(--color-dark); color: var(--color-light); padding: 5px 8px; border-radius: 4px; margin: 0 3px; }
-
         @media (min-width: 768px) {
             .hero-section .container { flex-direction: row; align-items: flex-start; }
             section { padding: 60px 0; }
             h2 { font-size: 32px; margin-bottom: 40px; }
         }
-
-        /* --- 2. DESCRIPTION SECTION --- */
         .description-section { text-align: center; }
         .usp-item { margin-bottom: 40px; }
         .usp-item:last-child { margin-bottom: 0; }
         .usp-item h3 { font-size: 22px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 8px; }
         .usp-item p { max-width: 600px; margin: 0 auto 15px; text-align: justify; }
         .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); max-width: 400px; margin: 0 auto; }
-
         @media (min-width: 768px) {
              .usp-item { display: flex; align-items: center; gap: 40px; text-align: left; }
              .usp-item:nth-child(even) { flex-direction: row-reverse; }
              .usp-item .usp-content, .usp-item img { flex: 1; margin: 0; max-width: 100%; }
              .usp-item p { margin: 0 0 15px 0; }
         }
-
-        /* --- VIDEO & REVIEW SECTIONS --- */
         .video-section, .review-section { background-color: var(--color-grey); }
         .slider-container { position: relative; }
         .swiper-pagination { position: static; margin-top: 20px; }
@@ -88,16 +80,12 @@
         .play-button:hover { transform: translate(-50%, -50%) scale(1.1); }
         .play-button svg { width: 30px; height: 30px; fill: var(--color-primary); }
         .video-slide.playing .play-button { display: none; }
-        
-        /* --- 4. FAQ SECTION --- */
         .faq-item { border-bottom: 1px solid #eee; }
         .faq-question { padding: 15px 0; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-question::before { content: '❓'; margin-right: 10px; }
         .faq-question::after { content: '+'; font-size: 24px; transition: transform 0.3s; }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding-left: 30px; }
-        
-        /* --- 5. ORDER FORM (POPUP MODAL) --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0s 0.3s; }
         .modal-overlay.visible { opacity: 1; visibility: visible; transition: opacity 0.3s; }
         .modal-content { background: var(--color-light); padding: 25px; border-radius: var(--border-radius); box-shadow: 0 5px 20px rgba(0,0,0,0.2); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s; }
@@ -109,8 +97,6 @@
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2); }
         .form-group textarea { resize: vertical; min-height: 80px; }
-        
-        /* --- 6. FOOTER SECTION --- */
         .footer { background: #1c1c1c; color: #ccc; padding: 40px 0 20px; }
         .footer .container { display: flex; flex-direction: column; gap: 30px; }
         .footer-usp { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; font-size: 14px; }
@@ -125,18 +111,13 @@
             .footer-info, .footer-contact { text-align: left; }
             .footer-info img { margin: 0 0 10px 0; }
         }
-
-        /* --- STICKY CTA BAR (MOBILE) --- */
         .sticky-cta-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--color-light); padding: 10px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 999; display: none; }
         @media (max-width: 767px) {
             .sticky-cta-bar { display: block; }
             body { padding-bottom: 80px; }
         }
-        
-        /* --- TOAST NOTIFICATION --- */
         .toast { position: fixed; top: 20px; right: 20px; background-color: #28a745; color: white; padding: 15px 20px; border-radius: 8px; z-index: 2000; opacity: 0; transform: translateY(-30px); transition: opacity 0.3s, transform 0.3s; }
         .toast.show { opacity: 1; transform: translateY(0); }
-
     </style>
 </head>
 <body>
@@ -180,7 +161,6 @@
             </div>
         </div>
     </section>
-
     <section class="description-section">
         <div class="container">
             <div class="usp-item">
@@ -206,7 +186,6 @@
             </div>
         </div>
     </section>
-
     <section class="video-section">
         <div class="container">
             <h2>🎥 Video thực tế từ khách hàng</h2>
@@ -237,7 +216,6 @@
             </div>
         </div>
     </section>
-
     <section class="review-section">
         <div class="container">
             <h2>✨ Trải nghiệm thực tế từ khách hàng</h2>
@@ -300,7 +278,6 @@
             </div>
         </div>
     </section>
-
     <section class="faq-section">
         <div class="container">
             <h2>Câu hỏi thường gặp</h2>
@@ -326,7 +303,6 @@
             </div>
         </div>
     </section>
-
     <footer class="footer">
         <div class="container">
             <div class="footer-left">
@@ -350,11 +326,9 @@
             </div>
         </div>
     </footer>
-
     <div class="sticky-cta-bar">
         <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
     </div>
-
     <div class="modal-overlay" id="order-modal">
         <div class="modal-content">
             <button class="modal-close" id="modal-close-button">&times;</button>
@@ -394,9 +368,7 @@
             </form>
         </div>
     </div>
-    
     <div class="toast" id="toast-notification">✅ Cảm ơn bạn đã đặt hàng!</div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -421,7 +393,8 @@
             }
         });
         
-        // --- VIDEO SLIDER (FIXED) ---
+        /*
+        // --- TẠM THỜI VÔ HIỆU HÓA VIDEO SLIDER ĐỂ KIỂM TRA ---
         const isMobile = window.innerWidth < 768;
         const videoSlider = new Swiper('.video-slider', {
             slidesPerView: 1.2,
@@ -436,7 +409,6 @@
             },
             on: {
                 init: function(swiper) {
-                    // Autoplay the first video on PC if it's visible
                     if (!isMobile) {
                         const activeSlide = swiper.slides[swiper.activeIndex];
                         const video = activeSlide.querySelector('video');
@@ -449,7 +421,6 @@
                     }
                 },
                 slideChange: function (swiper) {
-                    // A more robust way to handle video play/pause
                     swiper.slides.forEach((slide, index) => {
                         const video = slide.querySelector('video');
                         if (video) {
@@ -482,6 +453,7 @@
             playButton.addEventListener('click', togglePlay);
             if (isMobile) { video.addEventListener('click', togglePlay); }
         });
+        */
 
         // --- REVIEW SLIDER (FIXED) ---
         const reviewSlider = new Swiper('.review-slider', {
@@ -497,7 +469,7 @@
             }
         });
 
-        // --- FAQ ACCORDION ---
+        // --- CÁC PHẦN KHÁC GIỮ NGUYÊN ---
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
@@ -511,7 +483,6 @@
             });
         });
 
-        // --- COUNTDOWN TIMER ---
         function startCountdown() {
             const countdownElement = document.getElementById('countdown');
             const duration = 30 * 60;
@@ -534,7 +505,6 @@
         }
         startCountdown();
 
-        // --- MODAL (POPUP) ---
         const modal = document.getElementById('order-modal');
         const openButtons = document.querySelectorAll('.open-form-button');
         const closeButton = document.getElementById('modal-close-button');
@@ -544,7 +514,6 @@
             if (e.target === modal) { modal.classList.remove('visible'); }
         });
 
-        // --- FORM SUBMISSION ---
         const form = document.getElementById('order-form');
         const submitButton = document.getElementById('submit-button');
         const toast = document.getElementById('toast-notification');
@@ -562,13 +531,12 @@
                 body: JSON.stringify(data),
             })
             .then(res => {
-                if (!res.ok && res.type !== 'opaque') { // Opaque responses from no-cors don't have a status
+                if (!res.ok && res.type !== 'opaque') {
                     return res.text().then(text => {throw new Error('Network response was not ok: ' + text)});
                 }
-                return res.json().catch(() => ({})); // Handle opaque or empty responses
+                return res.json().catch(() => ({}));
             })
             .then(response => {
-                // Since response might be empty with some cors setups, we assume success
                 form.reset();
                 modal.classList.remove('visible');
                 toast.textContent = '✅ Cảm ơn bạn đã đặt hàng!';
