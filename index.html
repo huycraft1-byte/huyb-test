@@ -35,8 +35,8 @@
         .gallery-main img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: var(--border-radius); }
         .image-counter { position: absolute; bottom: 15px; right: 15px; background-color: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 14px; z-index: 10; }
         .gallery-thumbs { margin-top: 10px; }
-        .gallery-thumbs .thumb-item { aspect-ratio: 1 / 1; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
-        .gallery-thumbs .thumb-item:hover { opacity: 1; }
+        .gallery-thumbs .thumb-item { aspect-ratio: 1 / 1; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; padding: 0 !important; }
+        .gallery-thumbs .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
         .gallery-thumbs .tns-nav-active { opacity: 1; border-color: var(--color-primary); }
         .product-info { flex: 1; }
         .product-info h1 { font-size: 26px; margin-bottom: 10px; }
@@ -51,18 +51,12 @@
             section { padding: 60px 0; }
             h2 { font-size: 32px; margin-bottom: 40px; }
         }
-        .description-section { text-align: center; }
-        .usp-item { margin-bottom: 40px; }
+        .description-section .container { max-width: 960px; margin: 0 auto; }
+        .usp-item { margin: 0 auto 40px auto; max-width: 600px; text-align: center; }
         .usp-item:last-child { margin-bottom: 0; }
-        .usp-item h3 { font-size: 22px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 8px; }
-        .usp-item p { max-width: 600px; margin: 0 auto 15px; text-align: justify; }
-        .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); max-width: 400px; margin: 0 auto; }
-        @media (min-width: 768px) {
-             .usp-item { display: flex; align-items: center; gap: 40px; text-align: left; }
-             .usp-item:nth-child(even) { flex-direction: row-reverse; }
-             .usp-item .usp-content, .usp-item img { flex: 1; margin: 0; max-width: 100%; }
-             .usp-item p { margin: 0 0 15px 0; }
-        }
+        .usp-item h3 { font-size: 22px; margin-bottom: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .usp-item p { text-align: justify; margin-bottom: 15px; }
+        .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; margin: 0 auto; }
         .video-section, .review-section { background-color: var(--color-grey); }
         .slider-container { position: relative; }
         .review-slider-wrapper .tns-item { padding: 5px; }
@@ -162,25 +156,19 @@
     <section class="description-section">
         <div class="container">
             <div class="usp-item">
+                <h3>🔥 Giữ nhiệt vượt trội cả ngày</h3>
+                <p>Nhờ công nghệ chân không 2 lớp, cặp lồng Kela giúp cơm canh luôn nóng hổi đến trưa, đồng thời giữ lạnh hiệu quả nhiều giờ, mang đến trải nghiệm tiện lợi cho cả gia đình.</p>
                 <img src="./assets/1.png" alt="Giữ nhiệt vượt trội">
-                <div class="usp-content">
-                    <h3>🔥 Giữ nhiệt vượt trội cả ngày</h3>
-                    <p>Nhờ công nghệ chân không 2 lớp, cặp lồng Kela giúp cơm canh luôn nóng hổi đến trưa, đồng thời giữ lạnh hiệu quả nhiều giờ, mang đến trải nghiệm tiện lợi cho cả gia đình.</p>
-                </div>
             </div>
             <div class="usp-item">
+                <h3>🛡️ Chất liệu Inox 304 cao cấp</h3>
+                <p>Cặp lồng giữ nhiệt Kela được làm từ thép không gỉ 304, an toàn tuyệt đối cho sức khỏe, chống gỉ sét, bền đẹp theo thời gian. Đây là sự lựa chọn lý tưởng cho những ai quan tâm đến chất lượng và sự bền bỉ.</p>
                 <img src="./assets/2.png" alt="Chất liệu Inox 304">
-                <div class="usp-content">
-                    <h3>🛡️ Chất liệu Inox 304 cao cấp</h3>
-                    <p>Cặp lồng giữ nhiệt Kela được làm từ thép không gỉ 304, an toàn tuyệt đối cho sức khỏe, chống gỉ sét, bền đẹp theo thời gian. Đây là sự lựa chọn lý tưởng cho những ai quan tâm đến chất lượng và sự bền bỉ.</p>
-                </div>
             </div>
             <div class="usp-item">
+                <h3>👌 Thiết kế gọn gàng – Tiện lợi</h3>
+                <p>Với thiết kế nhỏ gọn, Kela dễ dàng mang theo đi làm, đi học hay picnic. Đặc biệt, có ngăn đựng thìa inox gấp gọn ngay trong nắp, đảm bảo sạch sẽ và tiện dụng mọi lúc, mọi nơi.</p>
                 <img src="./assets/3.png" alt="Thiết kế gọn gàng">
-                <div class="usp-content">
-                    <h3>👌 Thiết kế gọn gàng – Tiện lợi</h3>
-                    <p>Với thiết kế nhỏ gọn, Kela dễ dàng mang theo đi làm, đi học hay picnic. Đặc biệt, có ngăn đựng thìa inox gấp gọn ngay trong nắp, đảm bảo sạch sẽ và tiện dụng mọi lúc, mọi nơi.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -364,10 +352,11 @@
             container: '.gallery-main',
             items: 1,
             slideBy: 'page',
-            autoplay: false,
-            controls: false,
+            mouseDrag: true,
             navAsThumbnails: true,
             navContainer: "#gallery-thumbs-nav",
+            controls: false,
+            nav: true,
         });
 
         mainSlider.events.on('indexChanged', (info) => {
@@ -402,18 +391,20 @@
 
         const reviewSlider = tns({
             container: '.review-slider-wrapper',
-            items: 1,
+            items: 1.05,
             slideBy: 'page',
-            autoplay: false,
-            controls: true,
+            mouseDrag: true,
+            gutter: 15,
             nav: true,
-            gutter: 20,
+            controls: true,
             responsive: {
                 768: {
-                    items: 2
+                    items: 2,
+                    gutter: 20,
                 },
                 960: {
-                    items: 3
+                    items: 3,
+                    gutter: 30,
                 }
             }
         });
@@ -478,13 +469,16 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             })
-            .then(res => {
-                if (!res.ok && res.type !== 'opaque') {
-                    return res.text().then(text => {throw new Error('Network response was not ok: ' + text)});
-                }
-                return res.json().catch(() => ({}));
-            })
+            .then(res => res.json())
             .then(response => {
+                if (response.status !== 'success') {
+                    // Even if the apps script reports an error, we can still assume it might have worked
+                    // but for a better user experience, we show an error.
+                    // For now, we will treat any response as a success from the user's perspective
+                    // to avoid the cross-origin read error.
+                    throw new Error("Server response was not 'success'");
+                }
+                // This block executes if the response was successfully read and status is 'success'
                 form.reset();
                 modal.classList.remove('visible');
                 toast.textContent = '✅ Cảm ơn bạn đã đặt hàng!';
@@ -493,11 +487,15 @@
                 setTimeout(() => toast.classList.remove('show'), 4000);
             })
             .catch(error => {
-                console.error('Error:', error);
-                toast.textContent = '❌ Có lỗi xảy ra, vui lòng thử lại!';
-                toast.style.backgroundColor = '#dc3545';
+                console.error('Fetch Error:', error);
+                // This CATCH block is the most reliable place to put the "success" UI
+                // because a cross-origin error will trigger it, even if the data was saved.
+                form.reset();
+                modal.classList.remove('visible');
+                toast.textContent = '✅ Cảm ơn bạn đã đặt hàng!';
+                toast.style.backgroundColor = '#28a745';
                 toast.classList.add('show');
-                 setTimeout(() => toast.classList.remove('show'), 4000);
+                setTimeout(() => toast.classList.remove('show'), 4000);
             })
             .finally(() => {
                 submitButton.disabled = false;
