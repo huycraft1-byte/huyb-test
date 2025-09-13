@@ -398,8 +398,9 @@
                 swiper: galleryThumbs,
             },
             on: {
-                slideChange: function (swiper) {
-                    imageCounter.textContent = `${swiper.realIndex + 1} / ${swiper.slides.length}`;
+                // SỬA LỖI TƯƠNG THÍCH VỚI SWIPER 8
+                slideChange: function () {
+                    imageCounter.textContent = `${this.realIndex + 1} / ${this.slides.length}`;
                 }
             }
         });
