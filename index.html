@@ -372,12 +372,12 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    // SỬA LỖI CUỐI CÙNG: ĐỔI SANG WINDOW.ONLOAD
+    window.addEventListener('load', function () {
         
         // --- 1. HERO GALLERY (FIXED INITIALIZATION) ---
         const imageCounter = document.querySelector('.image-counter');
         
-        // Step 1: Initialize the thumbnails slider first and store it in a variable.
         const galleryThumbs = new Swiper('.gallery-thumbs', {
             spaceBetween: 10,
             slidesPerView: 4,
@@ -385,11 +385,10 @@
             watchSlidesProgress: true,
         });
 
-        // Step 2: Initialize the main slider and link it to the thumbs instance.
         const galleryMain = new Swiper('.gallery-main', {
             spaceBetween: 10,
             thumbs: {
-                swiper: galleryThumbs, // Pass the variable here, NOT a new instance
+                swiper: galleryThumbs,
             },
             on: {
                 slideChange: function () {
