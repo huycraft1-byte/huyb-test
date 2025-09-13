@@ -372,19 +372,16 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-    // SỬA LỖI CUỐI CÙNG: ĐỔI SANG WINDOW.ONLOAD
     window.addEventListener('load', function () {
         
-        // --- 1. HERO GALLERY (FIXED INITIALIZATION) ---
+        // --- 1. HERO GALLERY ---
         const imageCounter = document.querySelector('.image-counter');
-        
         const galleryThumbs = new Swiper('.gallery-thumbs', {
             spaceBetween: 10,
             slidesPerView: 4,
             freeMode: true,
             watchSlidesProgress: true,
         });
-
         const galleryMain = new Swiper('.gallery-main', {
             spaceBetween: 10,
             thumbs: {
@@ -397,8 +394,7 @@
             }
         });
         
-        // --- 2. VIDEO SLIDER (RE-ENABLED WITH FIXES) ---
-        const isMobile = window.innerWidth < 768;
+        // --- 2. VIDEO SLIDER (ĐÃ TẮT AUTO-PLAY GÂY LỖI) ---
         const videoSlider = new Swiper('.video-slider', {
             slidesPerView: 1.2,
             spaceBetween: 15,
@@ -411,43 +407,37 @@
                 960: { slidesPerView: 3, spaceBetween: 30 }
             },
             on: {
-                slideChange: function (swiper) {
-                    swiper.slides.forEach((slide) => {
+                // Tạm thời tắt hết sự kiện slideChange của video để đảm bảo ổn định
+                slideChange: function(swiper) {
+                    // Khi chuyển slide thì dừng hết các video khác
+                     swiper.slides.forEach(slide => {
                         const video = slide.querySelector('video');
-                        if (video) {
-                           video.pause();
-                           slide.classList.remove('playing');
-                        }
+                        if (video) video.pause();
                     });
-
-                    if (!isMobile) {
-                        const activeSlide = swiper.slides[swiper.activeIndex];
-                        const activeVideo = activeSlide.querySelector('video');
-                        if (activeVideo) {
-                            const playPromise = activeVideo.play();
-                            if (playPromise !== undefined) {
-                                playPromise.catch(error => {
-                                    console.warn("Autoplay was prevented", error);
-                                });
-                            }
-                        }
-                    }
                 }
             }
         });
 
+        // Kích hoạt Click-to-Play cho video
         document.querySelectorAll('.video-slide').forEach(slide => {
             const video = slide.querySelector('video');
             const playButton = slide.querySelector('.play-button');
-            function togglePlay() {
-                if (video.paused) { video.play(); slide.classList.add('playing'); } 
-                else { video.pause(); slide.classList.remove('playing'); }
+            function togglePlay(e) {
+                // Ngăn sự kiện click bị lan ra các element cha
+                e.stopPropagation(); 
+                if (video.paused) { 
+                    video.play(); 
+                    slide.classList.add('playing'); 
+                } else { 
+                    video.pause(); 
+                    slide.classList.remove('playing'); 
+                }
             }
             playButton.addEventListener('click', togglePlay);
-            if (isMobile) { video.addEventListener('click', togglePlay); }
+            video.addEventListener('click', togglePlay);
         });
 
-        // --- 3. REVIEW SLIDER (RE-ENABLED) ---
+        // --- 3. REVIEW SLIDER ---
         const reviewSlider = new Swiper('.review-slider', {
             slidesPerView: 1.05,
             spaceBetween: 15,
