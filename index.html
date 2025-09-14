@@ -403,16 +403,21 @@
                 lightboxVideo.src = videoSrc;
                 lightbox.style.display = 'flex';
                 setTimeout(() => lightbox.classList.add('visible'), 10);
-                // ĐÃ XÓA LỆNH TỰ ĐỘNG PLAY GÂY LỖI TRÊN MOBILE
+                const playPromise = lightboxVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Video autoplay was prevented. User needs to press play.", error);
+                    });
+                }
             });
         });
 
         function closeLightbox() {
             lightbox.classList.remove('visible');
-            setTimeout(() => {
+             setTimeout(() => {
                 lightboxVideo.pause();
                 lightboxVideo.src = "";
-                lightbox.style.display = 'none';
+                lightbox.style.display = 'none'; 
             }, 300);
         }
         lightboxClose.addEventListener('click', closeLightbox);
