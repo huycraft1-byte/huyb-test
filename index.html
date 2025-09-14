@@ -342,26 +342,30 @@
     document.addEventListener('DOMContentLoaded', function () {
         
         const mainCarousel = document.querySelector('.gallery-main');
-        const flktyMain = new Flickity( mainCarousel, {
-            cellAlign: 'left',
-            contain: true,
-            wrapAround: true,
-            pageDots: false,
-            prevNextButtons: false
-        });
+        if (mainCarousel) {
+            const flktyMain = new Flickity( mainCarousel, {
+                cellAlign: 'left',
+                contain: true,
+                wrapAround: true,
+                pageDots: false,
+                prevNextButtons: false
+            });
 
-        const navCarousel = document.querySelector('.gallery-nav');
-        const flktyNav = new Flickity( navCarousel, {
-            asNavFor: mainCarousel,
-            contain: true,
-            pageDots: false,
-            prevNextButtons: false
-        });
+            const navCarousel = document.querySelector('.gallery-nav');
+            if (navCarousel) {
+                const flktyNav = new Flickity( navCarousel, {
+                    asNavFor: mainCarousel,
+                    contain: true,
+                    pageDots: false,
+                    prevNextButtons: false
+                });
+            }
 
-        const imageCounter = document.querySelector('.image-counter');
-        flktyMain.on('select', function() {
-            imageCounter.textContent = `${flktyMain.selectedIndex + 1} / ${flktyMain.slides.length}`;
-        });
+            const imageCounter = document.querySelector('.image-counter');
+            flktyMain.on('select', function() {
+                imageCounter.textContent = `${flktyMain.selectedIndex + 1} / ${flktyMain.slides.length}`;
+            });
+        }
         
         const reviewSlider = document.querySelector('.review-slider');
         if (reviewSlider) {
