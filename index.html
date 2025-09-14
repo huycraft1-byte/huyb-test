@@ -81,8 +81,8 @@
         .faq-question::after { content: '+'; font-size: 24px; transition: transform 0.3s; }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding-left: 30px; }
-        .modal-overlay, .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0s 0.3s; }
-        .modal-overlay.visible, .lightbox-overlay.visible { visibility: visible; opacity: 1; transition: opacity 0.3s; }
+        .modal-overlay, .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.visible, .lightbox-overlay.visible { opacity: 1; }
         .modal-content { background: var(--color-light); padding: 25px; border-radius: var(--border-radius); box-shadow: 0 5px 20px rgba(0,0,0,0.2); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s; }
         .lightbox-content { position: relative; width: 90%; max-width: 800px; aspect-ratio: 16 / 9; transform: scale(0.9); transition: transform 0.3s; }
         .modal-overlay.visible .modal-content, .lightbox-overlay.visible .lightbox-content { transform: scale(1); }
@@ -124,21 +124,21 @@
         <div class="container">
             <div class="product-gallery">
                 <div class="gallery-main">
-                    <div class="carousel-cell"><img src="./assets/1.png" alt="Cặp lồng Kela 1"></div>
-                    <div class="carousel-cell"><img src="./assets/2.png" alt="Cặp lồng Kela 2"></div>
-                    <div class="carousel-cell"><img src="./assets/3.png" alt="Cặp lồng Kela 3"></div>
-                    <div class="carousel-cell"><img src="./assets/4.png" alt="Cặp lồng Kela 4"></div>
-                    <div class="carousel-cell"><img src="./assets/5.png" alt="Cặp lồng Kela 5"></div>
-                    <div class="carousel-cell"><img src="./assets/6.png" alt="Cặp lồng Kela 6"></div>
+                    <div class="carousel-cell"><img src="assets/1.png" alt="Cặp lồng Kela 1"></div>
+                    <div class="carousel-cell"><img src="assets/2.png" alt="Cặp lồng Kela 2"></div>
+                    <div class="carousel-cell"><img src="assets/3.png" alt="Cặp lồng Kela 3"></div>
+                    <div class="carousel-cell"><img src="assets/4.png" alt="Cặp lồng Kela 4"></div>
+                    <div class="carousel-cell"><img src="assets/5.png" alt="Cặp lồng Kela 5"></div>
+                    <div class="carousel-cell"><img src="assets/6.png" alt="Cặp lồng Kela 6"></div>
                 </div>
                 <div class="image-counter">1 / 6</div>
                 <div class="gallery-nav">
-                    <div class="carousel-cell"><img src="./assets/1.png" alt="Thumbnail 1"></div>
-                    <div class="carousel-cell"><img src="./assets/2.png" alt="Thumbnail 2"></div>
-                    <div class="carousel-cell"><img src="./assets/3.png" alt="Thumbnail 3"></div>
-                    <div class="carousel-cell"><img src="./assets/4.png" alt="Thumbnail 4"></div>
-                    <div class="carousel-cell"><img src="./assets/5.png" alt="Thumbnail 5"></div>
-                    <div class="carousel-cell"><img src="./assets/6.png" alt="Thumbnail 6"></div>
+                    <div class="carousel-cell"><img src="assets/1.png" alt="Thumbnail 1"></div>
+                    <div class="carousel-cell"><img src="assets/2.png" alt="Thumbnail 2"></div>
+                    <div class="carousel-cell"><img src="assets/3.png" alt="Thumbnail 3"></div>
+                    <div class="carousel-cell"><img src="assets/4.png" alt="Thumbnail 4"></div>
+                    <div class="carousel-cell"><img src="assets/5.png" alt="Thumbnail 5"></div>
+                    <div class="carousel-cell"><img src="assets/6.png" alt="Thumbnail 6"></div>
                 </div>
             </div>
             <div class="product-info">
@@ -164,17 +164,17 @@
             <div class="usp-item">
                 <h3>🔥 Giữ nhiệt vượt trội cả ngày</h3>
                 <p>Nhờ công nghệ chân không 2 lớp, cặp lồng Kela giúp cơm canh luôn nóng hổi đến trưa, đồng thời giữ lạnh hiệu quả nhiều giờ, mang đến trải nghiệm tiện lợi cho cả gia đình.</p>
-                <img src="./assets/1.png" alt="Giữ nhiệt vượt trội">
+                <img src="assets/1.png" alt="Giữ nhiệt vượt trội">
             </div>
             <div class="usp-item">
                 <h3>🛡️ Chất liệu Inox 304 cao cấp</h3>
                 <p>Cặp lồng giữ nhiệt Kela được làm từ thép không gỉ 304, an toàn tuyệt đối cho sức khỏe, chống gỉ sét, bền đẹp theo thời gian. Đây là sự lựa chọn lý tưởng cho những ai quan tâm đến chất lượng và sự bền bỉ.</p>
-                <img src="./assets/2.png" alt="Chất liệu Inox 304">
+                <img src="assets/2.png" alt="Chất liệu Inox 304">
             </div>
             <div class="usp-item">
                 <h3>👌 Thiết kế gọn gàng – Tiện lợi</h3>
                 <p>Với thiết kế nhỏ gọn, Kela dễ dàng mang theo đi làm, đi học hay picnic. Đặc biệt, có ngăn đựng thìa inox gấp gọn ngay trong nắp, đảm bảo sạch sẽ và tiện dụng mọi lúc, mọi nơi.</p>
-                <img src="./assets/3.png" alt="Thiết kế gọn gàng">
+                <img src="assets/3.png" alt="Thiết kế gọn gàng">
             </div>
         </div>
     </section>
@@ -184,16 +184,16 @@
             <h2>🎥 Video thực tế từ khách hàng</h2>
             <div class="video-slider">
                 <div class="carousel-cell">
-                    <div class="video-thumbnail" data-video-src="./assets/v4.mp4"><img src="./assets/1.png" alt="Thumbnail video 1"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                    <div class="video-thumbnail" data-video-src="assets/v4.mp4"><img src="assets/1.png" alt="Thumbnail video 1"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
                 </div>
                 <div class="carousel-cell">
-                    <div class="video-thumbnail" data-video-src="./assets/v3.mp4"><img src="./assets/2.png" alt="Thumbnail video 2"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                    <div class="video-thumbnail" data-video-src="assets/v3.mp4"><img src="assets/2.png" alt="Thumbnail video 2"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
                 </div>
                 <div class="carousel-cell">
-                    <div class="video-thumbnail" data-video-src="./assets/v2.mp4"><img src="./assets/3.png" alt="Thumbnail video 3"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                    <div class="video-thumbnail" data-video-src="assets/v2.mp4"><img src="assets/3.png" alt="Thumbnail video 3"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
                 </div>
                 <div class="carousel-cell">
-                    <div class="video-thumbnail" data-video-src="./assets/v1.mp4"><img src="./assets/4.png" alt="Thumbnail video 4"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                    <div class="video-thumbnail" data-video-src="assets/v1.mp4"><img src="assets/4.png" alt="Thumbnail video 4"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
                 </div>
             </div>
         </div>
@@ -205,7 +205,7 @@
             <div class="review-slider">
                 <div class="carousel-cell">
                     <div class="review-card">
-                        <img src="./assets/1.png" alt="Ảnh review 1">
+                        <img src="assets/1.png" alt="Ảnh review 1">
                         <p class="name">Nguyễn Thảo</p>
                         <p class="stars">★★★★★</p>
                         <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
@@ -213,7 +213,7 @@
                 </div>
                 <div class="carousel-cell">
                      <div class="review-card">
-                        <img src="./assets/3.png" alt="Ảnh review 2">
+                        <img src="assets/3.png" alt="Ảnh review 2">
                         <p class="name">Thu Hà</p>
                         <p class="stars">★★★★★</p>
                         <p class="content">"Hộp giúp giữ nóng cả buổi, bé ăn ngon hơn. Inox 304 an toàn nên yên tâm."</p>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="carousel-cell">
                      <div class="review-card">
-                        <img src="./assets/6.png" alt="Ảnh review 3">
+                        <img src="assets/6.png" alt="Ảnh review 3">
                         <p class="name">Minh Khoa</p>
                         <p class="stars">★★★★★</p>
                         <p class="content">"Sản phẩm chắc chắn, giữ nhiệt cực tốt. Giao hàng nhanh và đóng gói cẩn thận."</p>
@@ -229,7 +229,7 @@
                 </div>
                  <div class="carousel-cell">
                     <div class="review-card">
-                        <img src="./assets/1.png" alt="Ảnh review 4">
+                        <img src="assets/1.png" alt="Ảnh review 4">
                         <p class="name">Nguyễn Thảo</p>
                         <p class="stars">★★★★★</p>
                         <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
@@ -401,7 +401,8 @@
             thumb.addEventListener('click', () => {
                 const videoSrc = thumb.dataset.videoSrc;
                 lightboxVideo.src = videoSrc;
-                lightbox.classList.add('visible');
+                lightbox.style.display = 'flex';
+                setTimeout(() => lightbox.classList.add('visible'), 10);
                 const playPromise = lightboxVideo.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
@@ -415,6 +416,7 @@
             lightbox.classList.remove('visible');
             lightboxVideo.pause();
             lightboxVideo.src = "";
+             setTimeout(() => { lightbox.style.display = 'none'; }, 300);
         }
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
@@ -462,12 +464,14 @@
         const closeButton = document.getElementById('modal-close-button');
         openButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                modal.classList.add('visible');
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('visible'), 10);
             });
         });
 
         function closeModal() {
             modal.classList.remove('visible');
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
         }
         closeButton.addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
