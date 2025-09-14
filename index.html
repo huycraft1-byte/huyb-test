@@ -34,8 +34,10 @@
         .hero-section { background-color: var(--color-grey); padding-top: 30px; }
         .hero-section .container { display: flex; flex-direction: column; gap: 30px; }
         .product-gallery { flex: 1; position: relative; }
-        .product-gallery .lSSlideWrapper { border-radius: var(--border-radius); }
-        .product-gallery .lSSlideOuter .lSPager.lSGallery li { aspect-ratio: 1/1; opacity: 0.6; border: 2px solid transparent; border-radius: 8px; transition: opacity 0.3s; }
+        .product-gallery .lSSlideWrapper { border-radius: var(--border-radius); box-shadow: var(--shadow); }
+        .product-gallery #lightSlider li img { width: 100%; height: 100%; aspect-ratio: 1/1; object-fit: cover; }
+        .product-gallery .lSSlideOuter .lSPager.lSGallery { margin-top: 10px !important; }
+        .product-gallery .lSSlideOuter .lSPager.lSGallery li { width: calc(16.66% - 8.33px) !important; aspect-ratio: 1/1; opacity: 0.6; border: 2px solid transparent; border-radius: 8px; transition: opacity 0.3s; }
         .product-gallery .lSSlideOuter .lSPager.lSGallery li.active { opacity: 1; border-color: var(--color-primary); }
         .product-gallery .lSSlideOuter .lSPager.lSGallery img { width: 100%; height: 100%; object-fit: cover; }
         .image-counter { position: absolute; bottom: 80px; right: 15px; background-color: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 14px; z-index: 10; }
@@ -343,7 +345,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
 
     <script>
+    // HỢP NHẤT TOÀN BỘ SCRIPT VÀO $(document).ready() ĐỂ TRÁNH XUNG ĐỘT
     $(document).ready(function() {
+        // --- 1. HERO SLIDER ---
         const imageCounter = $('.image-counter');
         const mainSlider = $('#lightSlider').lightSlider({
             gallery: true,
@@ -358,9 +362,8 @@
                 imageCounter.text(`${el.getCurrentSlideCount()} / ${el.getTotalSlideCount()}`);
             }
         });
-    });
 
-    window.addEventListener('load', function () {
+        // --- 2. VIDEO SLIDER ---
         const videoSlider = tns({
             container: '.video-slider-wrapper',
             items: 1,
@@ -399,7 +402,7 @@
             video.addEventListener('ended', () => slide.classList.remove('playing'));
         });
 
-
+        // --- 3. REVIEW SLIDER ---
         const reviewSlider = tns({
             container: '.review-slider-wrapper',
             items: 1.05,
@@ -414,6 +417,7 @@
             }
         });
         
+        // --- 4. CÁC SCRIPT CÒN LẠI ---
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
