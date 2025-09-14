@@ -17,7 +17,10 @@
             --border-radius: 16px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html, body { 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; /* KHÓA CUỘN NGANG */
+        }
         body { font-family: var(--font-main); color: var(--color-text); line-height: 1.6; background-color: var(--color-light); }
         .container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
         section { padding: 50px 0; }
@@ -44,7 +47,9 @@
         .product-info .price { margin-bottom: 15px; }
         .product-info .new-price { font-size: 32px; font-weight: bold; color: var(--color-primary); }
         .product-info .old-price { font-size: 18px; text-decoration: line-through; color: #999; margin-left: 10px; }
-        .product-info .usp-quick { background-color: #fffbe6; border: 1px solid #ffe58f; border-radius: 8px; padding: 10px 15px; font-size: 14px; margin-bottom: 20px; }
+        .usp-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; font-size: 14px; text-align: left; background-color: #fffbe6; border: 1px solid #ffe58f; border-radius: 8px; padding: 15px; }
+        .usp-quick-item { display: flex; align-items: center; gap: 8px; }
+        .usp-quick-item svg { width: 24px; height: 24px; flex-shrink: 0; fill: #faad14; }
         .countdown { text-align: center; margin-top: 15px; font-size: 16px; font-weight: bold; }
         .countdown span { background-color: var(--color-dark); color: var(--color-light); padding: 5px 8px; border-radius: 4px; margin: 0 3px; }
         @media (min-width: 768px) {
@@ -59,8 +64,9 @@
         .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; margin: 0 auto; }
         .video-section, .review-section { background-color: var(--color-grey); }
         .slider-wrapper { position: relative; }
-        .slider-container { overflow: hidden; touch-action: pan-y; }
-        .slider-inner { display: flex; gap: 20px; transition: transform 0.4s ease; }
+        .slider-container { overflow: hidden; }
+        .slider-inner { display: flex; gap: 20px; transition: transform 0.4s ease; cursor: grab; }
+        .slider-inner:active { cursor: grabbing; }
         .slider-item { flex-shrink: 0; }
         .slider-controls button { background-color: rgba(255,255,255,0.7); color: transparent; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 0; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: background-color 0.2s; }
         .slider-controls button:hover { background-color: white; }
@@ -70,29 +76,31 @@
         .slider-pagination .dot { width: 10px; height: 10px; padding: 0; margin: 0 5px; border-radius: 50%; background: #ccc; border: none; cursor: pointer; }
         .slider-pagination .dot.active { background: var(--color-primary); }
         .review-card { min-width: calc(100% / 1.05); background: var(--color-light); padding: 20px; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center; }
-        .review-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .review-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
         .review-card .name { font-weight: bold; }
         .review-card .stars { color: #fadb14; margin: 5px 0; }
         @media (min-width: 768px) { .review-card { min-width: calc((100% - 40px) / 3); } }
-        .video-slide { position: relative; cursor: pointer; overflow: hidden; border-radius: var(--border-radius); box-shadow: var(--shadow); aspect-ratio: 9 / 16; background-color: #000; min-width: calc((100% - 40px) / 3); }
-        @media (max-width: 767px) { .video-slide { min-width: 100%; } }
-        .video-slide .video-thumb, .video-slide .play-icon { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; transition: opacity 0.3s; }
-        .video-slide video { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .video-slide.playing .video-thumb, .video-slide.playing .play-icon { opacity: 0; pointer-events: none; }
-        .video-slide.playing video { display: block; }
-        .play-icon { display: flex; align-items: center; justify-content: center; }
-        .play-icon svg { width: 60px; height: 60px; fill: rgba(255,255,255,0.8); }
+        .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (min-width: 768px) { .video-grid { grid-template-columns: repeat(4, 1fr); } }
+        .video-thumbnail { position: relative; cursor: pointer; overflow: hidden; border-radius: var(--border-radius); box-shadow: var(--shadow); aspect-ratio: 9 / 16; }
+        .video-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+        .video-thumbnail .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+        .video-thumbnail:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); }
+        .play-icon svg { width: 30px; height: 30px; fill: var(--color-primary); }
         .faq-item { border-bottom: 1px solid #eee; }
         .faq-question { padding: 15px 0; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-question::before { content: '❓'; margin-right: 10px; }
         .faq-question::after { content: '+'; font-size: 24px; transition: transform 0.3s; }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding-left: 30px; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0s 0.3s; }
-        .modal-overlay.visible { opacity: 1; visibility: visible; transition: opacity 0.3s; }
+        .modal-overlay, .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0s 0.3s; }
+        .modal-overlay.visible, .lightbox-overlay.visible { opacity: 1; visibility: visible; transition: opacity 0.3s; }
         .modal-content { background: var(--color-light); padding: 25px; border-radius: var(--border-radius); box-shadow: 0 5px 20px rgba(0,0,0,0.2); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s; }
-        .modal-overlay.visible .modal-content { transform: scale(1); }
-        .modal-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 20px; cursor: pointer; line-height: 30px; text-align: center; }
+        .lightbox-content { position: relative; width: 90%; max-width: 800px; aspect-ratio: 16 / 9; transform: scale(0.9); transition: transform 0.3s; }
+        .modal-overlay.visible .modal-content, .lightbox-overlay.visible .lightbox-content { transform: scale(1); }
+        .modal-close, .lightbox-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 20px; cursor: pointer; line-height: 30px; text-align: center; }
+        .lightbox-close { top: -15px; right: -15px; background: white; color: black; }
+        .lightbox-content video { width: 100%; height: 100%; border-radius: var(--border-radius); }
         .modal-content h2 { text-align: left; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
@@ -136,7 +144,7 @@
                         <div class="slide"><img src="./assets/5.png" alt="Cặp lồng Kela 5"></div>
                         <div class="slide"><img src="./assets/6.png" alt="Cặp lồng Kela 6"></div>
                     </div>
-                     <div class="image-counter">1 / 6</div>
+                    <div class="image-counter">1 / 6</div>
                 </div>
                 <div class="gallery-thumbs">
                     <div class="thumb-item active"><img src="./assets/1.png" alt="Thumbnail 1"></div>
@@ -153,7 +161,12 @@
                     <span class="new-price">350.000đ</span>
                     <span class="old-price">870.000đ</span>
                 </div>
-                <div class="usp-quick">SALE 60% hôm nay – Số lượng có hạn | Freeship toàn quốc | Đổi trả 3 ngày | Hàng chính hãng</div>
+                <div class="usp-quick">
+                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5,1.17L17.33,0L16.17,1.17L15,0L13.83,1.17L12.67,0L11.5,1.17L10.33,0L9.17,1.17L8,0L6.83,1.17L5.67,0L4.5,1.17L3.33,0L2.17,1.17L1,0V22L2.17,20.83L3.33,22L4.5,20.83L5.67,22L6.83,20.83L8,22L9.17,20.83L10.33,22L11.5,20.83L12.67,22L13.83,20.83L15,22L16.17,20.83L17.33,22L18.5,20.83L19.67,22L20.83,20.83L22,22V0L20.83,1.17L19.67,0L18.5,1.17M8,10H16V12H8V10M8,14H16V16H8V14M8,6H16V8H8V6Z" /></svg> <span>Hàng chính hãng</span></div>
+                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5,8C9.85,8,7.45,8.99,5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22,10.54,10.5,12.5,10.5C16.04,10.5,19.05,12.81,20.1,16L22.47,15.22C21.08,11.03,17.15,8,12.5,8Z" /></svg> <span>Đổi trả trong 3 ngày</span></div>
+                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4H3M6,18A1,1 0 0,1 5,17A1,1 0 0,1 6,16A1,1 0 0,1 7,17A1,1 0 0,1 6,18M18,18A1,1 0 0,1 17,17A1,1 0 0,1 18,16A1,1 0 0,1 19,17A1,1 0 0,1 18,18M17,10H20L21.5,12H17V10Z" /></svg> <span>Freeship toàn quốc</span></div>
+                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg> <span>Hỗ trợ 24/7</span></div>
+                </div>
                 <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
                 <div class="countdown" id="countdown"></div>
             </div>
@@ -186,26 +199,10 @@
             <div id="video-slider" class="slider-wrapper">
                 <div class="slider-container">
                     <div class="slider-inner">
-                        <div class="slider-item video-slide">
-                            <img class="video-thumb" src="./assets/1.png" alt="Video thumbnail 1">
-                            <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
-                            <video src="./assets/v4.mp4" preload="metadata" muted playsinline loop></video>
-                        </div>
-                        <div class="slider-item video-slide">
-                            <img class="video-thumb" src="./assets/2.png" alt="Video thumbnail 2">
-                            <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
-                            <video src="./assets/v3.mp4" preload="metadata" muted playsinline loop></video>
-                        </div>
-                        <div class="slider-item video-slide">
-                            <img class="video-thumb" src="./assets/3.png" alt="Video thumbnail 3">
-                            <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
-                            <video src="./assets/v2.mp4" preload="metadata" muted playsinline loop></video>
-                        </div>
-                        <div class="slider-item video-slide">
-                            <img class="video-thumb" src="./assets/4.png" alt="Video thumbnail 4">
-                            <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
-                            <video src="./assets/v1.mp4" preload="metadata" muted playsinline loop></video>
-                        </div>
+                        <div class="slider-item video-thumbnail" data-video-src="./assets/v4.mp4"><img src="./assets/1.png" alt="Thumbnail video 1"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                        <div class="slider-item video-thumbnail" data-video-src="./assets/v3.mp4"><img src="./assets/2.png" alt="Thumbnail video 2"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                        <div class="slider-item video-thumbnail" data-video-src="./assets/v2.mp4"><img src="./assets/3.png" alt="Thumbnail video 3"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
+                        <div class="slider-item video-thumbnail" data-video-src="./assets/v1.mp4"><img src="./assets/4.png" alt="Thumbnail video 4"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
                     </div>
                 </div>
                 <div class="slider-controls">
@@ -306,6 +303,13 @@
         <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
     </div>
 
+     <div class="lightbox-overlay" id="video-lightbox">
+        <div class="lightbox-content">
+            <video src="" controls autoplay></video>
+            <button class="lightbox-close">&times;</button>
+        </div>
+    </div>
+    
     <div class="modal-overlay" id="order-modal">
         <div class="modal-content">
             <button class="modal-close" id="modal-close-button">&times;</button>
@@ -382,17 +386,8 @@
         galleryMain.addEventListener('touchend', end);
         galleryMain.addEventListener('mouseleave', end);
 
-        function start(x) {
-            isDragging = true;
-            startX = x;
-            galleryMainInner.style.transition = 'none';
-        }
-        function move(x) {
-            if (!isDragging) return;
-            const currentPosition = x;
-            currentTranslate = prevTranslate + currentPosition - startX;
-            galleryMainInner.style.transform = `translateX(${currentTranslate}px)`;
-        }
+        function start(x) { isDragging = true; startX = x; galleryMainInner.style.transition = 'none'; }
+        function move(x) { if (!isDragging) return; currentTranslate = prevTranslate + x - startX; galleryMainInner.style.transform = `translateX(${currentTranslate}px)`; }
         function end() {
             if (!isDragging) return;
             isDragging = false;
@@ -404,93 +399,108 @@
         }
         
         // --- GENERIC SLIDER FUNCTION ---
-        function createSlider(sliderId, config) {
+        function createSlider(sliderId, itemsPerViewDesktop = 3) {
             const sliderWrapper = document.getElementById(sliderId);
+            if (!sliderWrapper) return;
+            
             const container = sliderWrapper.querySelector('.slider-container');
             const inner = sliderWrapper.querySelector('.slider-inner');
             const items = sliderWrapper.querySelectorAll('.slider-item');
             const prevBtn = sliderWrapper.querySelector('.prev-btn');
             const nextBtn = sliderWrapper.querySelector('.next-btn');
             const pagination = sliderWrapper.querySelector('.slider-pagination');
-            let slideWidth = items[0].offsetWidth + (config.gap || 0);
+            
             let currentIndex = 0;
-            const totalSlides = items.length;
+            const gap = 20;
 
-            function goTo(index) {
-                if (index < 0) index = 0;
-                if (index > totalSlides - 1) index = totalSlides - 1;
-                inner.style.transform = `translateX(-${index * slideWidth}px)`;
-                currentIndex = index;
-                updatePagination();
-            }
-            
-            function updatePagination() {
-                if (!pagination) return;
-                Array.from(pagination.children).forEach((dot, idx) => {
-                    dot.classList.toggle('active', idx === currentIndex);
-                });
+            function getItemsPerView() {
+                return window.innerWidth < 768 ? 1.05 : itemsPerViewDesktop;
             }
 
-            if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-            if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-            
-            if(pagination) {
-                 for(let i = 0; i < totalSlides; i++) {
-                    const dot = document.createElement('button');
-                    dot.classList.add('dot');
-                    dot.addEventListener('click', () => goTo(i));
-                    pagination.appendChild(dot);
+            function updateSlider() {
+                const itemsPerView = getItemsPerView();
+                const containerWidth = container.offsetWidth;
+                const slideWidth = (containerWidth - (Math.floor(itemsPerView) - 1) * gap) / Math.floor(itemsPerView);
+
+                items.forEach(item => { item.style.minWidth = `${slideWidth}px`; });
+
+                const maxIndex = items.length - Math.floor(itemsPerView);
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+                inner.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+
+                if (pagination) {
+                    pagination.innerHTML = '';
+                    for (let i = 0; i <= maxIndex; i++) {
+                        const dot = document.createElement('button');
+                        dot.classList.add('dot');
+                        if (i === currentIndex) dot.classList.add('active');
+                        dot.addEventListener('click', () => { currentIndex = i; updateSlider(); });
+                        pagination.appendChild(dot);
+                    }
                 }
-                updatePagination();
+            }
+            
+            prevBtn.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; updateSlider(); } });
+            nextBtn.addEventListener('click', () => { if (currentIndex < items.length - getItemsPerView()) { currentIndex++; updateSlider(); } });
+
+            // Drag/Swipe
+            let isDragging = false, startX = 0, currentTranslate = 0, initialTranslate = 0;
+            container.addEventListener('mousedown', e => dragStart(e.clientX));
+            container.addEventListener('touchstart', e => dragStart(e.touches[0].clientX), { passive: true });
+            container.addEventListener('mousemove', e => dragMove(e.clientX));
+            container.addEventListener('touchmove', e => dragMove(e.touches[0].clientX));
+            container.addEventListener('mouseup', dragEnd);
+            container.addEventListener('touchend', dragEnd);
+            container.addEventListener('mouseleave', dragEnd);
+
+            function dragStart(x) { isDragging = true; startX = x; inner.style.transition = 'none'; initialTranslate = -currentIndex * (inner.querySelector('.slider-item').offsetWidth + gap); }
+            function dragMove(x) { if (!isDragging) return; currentTranslate = initialTranslate + x - startX; inner.style.transform = `translateX(${currentTranslate}px)`; }
+            function dragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                const movedBy = currentTranslate - initialTranslate;
+                if (movedBy < -50 && currentIndex < items.length - getItemsPerView()) currentIndex++;
+                if (movedBy > 50 && currentIndex > 0) currentIndex--;
+                inner.style.transition = 'transform 0.4s ease';
+                updateSlider();
             }
 
-             let isDragging = false, startX = 0, currentTranslate = 0;
-             container.addEventListener('mousedown', e => start(e.clientX));
-             container.addEventListener('touchstart', e => start(e.touches[0].clientX), { passive: true });
-             container.addEventListener('mousemove', e => move(e.clientX));
-             container.addEventListener('touchmove', e => move(e.touches[0].clientX));
-             container.addEventListener('mouseup', end);
-             container.addEventListener('touchend', end);
-             container.addEventListener('mouseleave', end);
-
-             function start(x) { isDragging = true; startX = x; inner.style.transition = 'none'; }
-             function move(x) { if (!isDragging) return; currentTranslate = -currentIndex * slideWidth + x - startX; inner.style.transform = `translateX(${currentTranslate}px)`; }
-             function end(e) {
-                 if (!isDragging) return;
-                 isDragging = false;
-                 const movedBy = currentTranslate - (-currentIndex * slideWidth);
-                 if (movedBy < -50 && currentIndex < totalSlides - 1) currentIndex++;
-                 if (movedBy > 50 && currentIndex > 0) currentIndex--;
-                 inner.style.transition = 'transform 0.4s ease';
-                 goTo(currentIndex);
-             }
+            window.addEventListener('resize', updateSlider);
+            updateSlider();
         }
 
-        createSlider('review-slider', { gap: 20 });
-        createSlider('video-slider', { gap: 20 });
+        createSlider('review-slider', 3);
+        createSlider('video-slider', 3);
 
-        // --- Video Player Logic ---
-         document.querySelectorAll('.video-slide').forEach(slide => {
-            const video = slide.querySelector('video');
-            slide.addEventListener('click', () => {
-                document.querySelectorAll('.video-slide video').forEach(v => {
-                    if (v !== video) v.pause();
-                });
-                if (video.paused) {
-                    slide.classList.add('playing');
-                    video.play();
-                } else {
-                    video.pause();
-                }
+        // --- Video Lightbox Logic ---
+        const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+        const lightbox = document.getElementById('video-lightbox');
+        const lightboxVideo = lightbox.querySelector('video');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+        
+        videoThumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const videoSrc = thumb.dataset.videoSrc;
+                lightboxVideo.src = videoSrc;
+                lightbox.classList.add('visible');
             });
-            video.addEventListener('pause', () => slide.classList.remove('playing'));
-            video.addEventListener('ended', () => slide.classList.remove('playing'));
         });
 
+        function closeLightbox() {
+            lightbox.classList.remove('visible');
+            lightboxVideo.pause();
+            lightboxVideo.src = "";
+        }
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
         
         // --- COUNTDOWN, FAQ, MODAL, FORM (No change) ---
         (function() {
             const countdownElement = document.getElementById('countdown');
+            if(!countdownElement) return;
             const duration = 30 * 60;
             let endTime = localStorage.getItem('countdownEndTime');
             if (!endTime || new Date().getTime() > endTime) {
