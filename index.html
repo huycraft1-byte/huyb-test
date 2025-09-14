@@ -34,9 +34,8 @@
         .gallery-main-container { position: relative; }
         .gallery-main img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: var(--border-radius); }
         .image-counter { position: absolute; bottom: 15px; right: 15px; background-color: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 14px; z-index: 10; }
-        .gallery-thumbs { margin-top: 10px; }
-        .gallery-thumbs .tns-nav { display: flex; gap: 10px; }
-        .gallery-thumbs .thumb-item { aspect-ratio: 1 / 1; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; padding: 0 !important; }
+        .gallery-thumbs .tns-nav { display: flex; gap: 10px; justify-content: center; }
+        .gallery-thumbs .thumb-item { width: 100%; aspect-ratio: 1 / 1; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; padding: 0 !important; }
         .gallery-thumbs .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
         .gallery-thumbs .tns-nav-active { opacity: 1; border-color: var(--color-primary); }
         .product-info { flex: 1; }
@@ -60,13 +59,14 @@
         .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; margin: 0 auto; }
         .video-section, .review-section { background-color: var(--color-grey); }
         .slider-container { position: relative; touch-action: pan-y; }
-        .slider-container .tns-controls button { background: rgba(255,255,255,0.7); color: transparent; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 0; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background-repeat: no-repeat; background-position: center; }
-        .slider-container .tns-controls button[data-controls="prev"] { left: -10px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'/%3E%3C/svg%3E"); }
-        .slider-container .tns-controls button[data-controls="next"] { right: -10px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z'/%3E%3C/svg%3E"); }
+        .slider-container .tns-controls button { background-color: rgba(255,255,255,0.7); color: transparent; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 0; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: background-color 0.2s; }
+        .slider-container .tns-controls button:hover { background-color: white; }
+        .slider-container .tns-controls button[data-controls="prev"] { left: -20px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'/%3E%3C/svg%3E"); }
+        .slider-container .tns-controls button[data-controls="next"] { right: -20px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z'/%3E%3C/svg%3E"); }
         .slider-container .tns-nav { text-align: center; margin-top: 15px; }
         .slider-container .tns-nav button { width: 10px; height: 10px; padding: 0; margin: 0 5px; border-radius: 50%; background: #ccc; border: none; }
         .slider-container .tns-nav .tns-nav-active { background: var(--color-primary); }
-        .review-slider-wrapper .tns-item { padding: 5px; }
+        .review-slider-wrapper .tns-item, .video-slider-wrapper .tns-item { padding: 5px; }
         .review-card { background: var(--color-light); padding: 20px; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center; height: 100%; }
         .review-card img { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover; }
         .review-card .name { font-weight: bold; }
@@ -359,7 +359,7 @@
             mouseDrag: true,
             navAsThumbnails: true,
             navContainer: "#gallery-thumbs-nav",
-            controls: false,
+            controls: false
         });
 
         mainSlider.events.on('indexChanged', (info) => {
@@ -371,7 +371,7 @@
             items: 1,
             slideBy: 'page',
             mouseDrag: true,
-            gutter: 15,
+            gutter: 20,
             nav: true,
             controls: true,
             responsive: {
@@ -381,7 +381,6 @@
         });
         
         document.querySelectorAll('.video-slide').forEach(slide => {
-            const playButton = slide.querySelector('.play-icon');
             const video = slide.querySelector('video');
             const allVideos = document.querySelectorAll('.video-slider-wrapper video');
 
@@ -397,7 +396,7 @@
                     slide.classList.add('playing');
                     video.play();
                 } else {
-                    video.pause(); // Allow pausing by clicking the video itself
+                    video.pause();
                 }
             });
             
@@ -482,7 +481,6 @@
                 body: JSON.stringify(data),
             })
             .finally(() => {
-                // Assume success regardless of cors error and show feedback to user
                 form.reset();
                 modal.classList.remove('visible');
                 toast.textContent = '✅ Cảm ơn bạn đã đặt hàng!';
