@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cặp lồng giữ nhiệt Kela Đức 1,2L</title>
     
+    <!-- Flickity CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
     <style>
         :root {
             --color-primary: #ff4d4d;
@@ -19,7 +22,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { 
             scroll-behavior: smooth; 
-            overflow-x: hidden;
+            overflow-x: hidden; /* KHÓA CUỘN NGANG */
         }
         body { font-family: var(--font-main); color: var(--color-text); line-height: 1.6; background-color: var(--color-light); }
         .container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
@@ -32,16 +35,12 @@
         .hero-section { background-color: var(--color-grey); padding-top: 30px; }
         .hero-section .container { display: flex; flex-direction: column; gap: 30px; }
         .product-gallery { flex: 1; position: relative; }
-        .gallery-main { position: relative; overflow: hidden; border-radius: var(--border-radius); box-shadow: var(--shadow); cursor: grab; }
-        .gallery-main:active { cursor: grabbing; }
-        .gallery-main-inner { display: flex; transition: transform 0.4s ease; }
-        .gallery-main-inner .slide { min-width: 100%; aspect-ratio: 1/1; }
-        .gallery-main-inner .slide img { width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
+        .gallery-main .carousel-cell { width: 100%; aspect-ratio: 1/1; }
+        .gallery-main .carousel-cell img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius); }
+        .gallery-nav .carousel-cell { width: 16.66%; aspect-ratio: 1/1; margin-right: 10px; cursor: pointer; opacity: 0.6; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
+        .gallery-nav .carousel-cell.is-nav-selected { opacity: 1; border-color: var(--color-primary); }
+        .gallery-nav .carousel-cell img { width: 100%; height: 100%; object-fit: cover; }
         .image-counter { position: absolute; bottom: 15px; right: 15px; background-color: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 14px; z-index: 10; }
-        .gallery-thumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-        .thumb-item { width: calc(16.66% - 8.33px); aspect-ratio: 1/1; cursor: pointer; opacity: 0.6; transition: opacity 0.3s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
-        .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
-        .thumb-item.active { opacity: 1; border-color: var(--color-primary); }
         .product-info { flex: 1; }
         .product-info h1 { font-size: 26px; margin-bottom: 10px; }
         .product-info .price { margin-bottom: 15px; }
@@ -63,29 +62,14 @@
         .usp-item p { text-align: justify; margin-bottom: 15px; }
         .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; margin: 0 auto; }
         .video-section, .review-section { background-color: var(--color-grey); }
-        .slider-wrapper { position: relative; }
-        .slider-container { overflow: hidden; cursor: grab; }
-        .slider-container:active { cursor: grabbing; }
-        .slider-inner { display: flex; gap: 20px; transition: transform 0.4s ease; }
-        .slider-item { flex-shrink: 0; }
-        .slider-controls { display: none; }
-        @media (min-width: 768px) {
-            .slider-controls { display: block; }
-            .slider-controls button { background-color: rgba(255,255,255,0.7); color: transparent; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 0; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: background-color 0.2s; }
-            .slider-controls button:hover { background-color: white; }
-            .slider-controls .prev-btn { left: -20px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'/%3E%3C/svg%3E"); }
-            .slider-controls .next-btn { right: -20px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z'/%3E%3C/svg%3E"); }
-        }
-        .slider-pagination { text-align: center; margin-top: 15px; }
-        .slider-pagination .dot { width: 10px; height: 10px; padding: 0; margin: 0 5px; border-radius: 50%; background: #ccc; border: none; cursor: pointer; }
-        .slider-pagination .dot.active { background: var(--color-primary); }
-        .review-card { min-width: calc(100% / 1.05); background: var(--color-light); padding: 20px; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center; }
+        .review-slider .carousel-cell { width: 95%; margin-right: 15px; }
+        @media (min-width: 768px) { .review-slider .carousel-cell { width: calc( (100% - 40px) / 3 ); } }
+        .review-card { background: var(--color-light); padding: 20px; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center; height: 100%; }
         .review-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
         .review-card .name { font-weight: bold; }
         .review-card .stars { color: #fadb14; margin: 5px 0; }
-        @media (min-width: 768px) { .review-card { min-width: calc((100% - 40px) / 3); } }
-        .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (min-width: 768px) { .video-grid { grid-template-columns: repeat(4, 1fr); } }
+        .video-slider .carousel-cell { width: 45%; margin-right: 15px; }
+        @media (min-width: 768px) { .video-slider .carousel-cell { width: calc( (100% - 40px) / 3 ); } }
         .video-thumbnail { position: relative; cursor: pointer; overflow: hidden; border-radius: var(--border-radius); box-shadow: var(--shadow); aspect-ratio: 9 / 16; }
         .video-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
         .video-thumbnail .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
@@ -140,23 +124,21 @@
         <div class="container">
             <div class="product-gallery">
                 <div class="gallery-main">
-                    <div class="gallery-main-inner">
-                        <div class="slide"><img src="assets/1.png" alt="Cặp lồng Kela 1"></div>
-                        <div class="slide"><img src="assets/2.png" alt="Cặp lồng Kela 2"></div>
-                        <div class="slide"><img src="assets/3.png" alt="Cặp lồng Kela 3"></div>
-                        <div class="slide"><img src="assets/4.png" alt="Cặp lồng Kela 4"></div>
-                        <div class="slide"><img src="assets/5.png" alt="Cặp lồng Kela 5"></div>
-                        <div class="slide"><img src="assets/6.png" alt="Cặp lồng Kela 6"></div>
-                    </div>
-                    <div class="image-counter">1 / 6</div>
+                    <div class="carousel-cell"><img src="assets/1.png" alt="Cặp lồng Kela 1"></div>
+                    <div class="carousel-cell"><img src="assets/2.png" alt="Cặp lồng Kela 2"></div>
+                    <div class="carousel-cell"><img src="assets/3.png" alt="Cặp lồng Kela 3"></div>
+                    <div class="carousel-cell"><img src="assets/4.png" alt="Cặp lồng Kela 4"></div>
+                    <div class="carousel-cell"><img src="assets/5.png" alt="Cặp lồng Kela 5"></div>
+                    <div class="carousel-cell"><img src="assets/6.png" alt="Cặp lồng Kela 6"></div>
                 </div>
-                <div class="gallery-thumbs">
-                    <div class="thumb-item active"><img src="assets/1.png" alt="Thumbnail 1"></div>
-                    <div class="thumb-item"><img src="assets/2.png" alt="Thumbnail 2"></div>
-                    <div class="thumb-item"><img src="assets/3.png" alt="Thumbnail 3"></div>
-                    <div class="thumb-item"><img src="assets/4.png" alt="Thumbnail 4"></div>
-                    <div class="thumb-item"><img src="assets/5.png" alt="Thumbnail 5"></div>
-                    <div class="thumb-item"><img src="assets/6.png" alt="Thumbnail 6"></div>
+                <div class="image-counter">1 / 6</div>
+                <div class="gallery-nav">
+                    <div class="carousel-cell"><img src="assets/1.png" alt="Thumbnail 1"></div>
+                    <div class="carousel-cell"><img src="assets/2.png" alt="Thumbnail 2"></div>
+                    <div class="carousel-cell"><img src="assets/3.png" alt="Thumbnail 3"></div>
+                    <div class="carousel-cell"><img src="assets/4.png" alt="Thumbnail 4"></div>
+                    <div class="carousel-cell"><img src="assets/5.png" alt="Thumbnail 5"></div>
+                    <div class="carousel-cell"><img src="assets/6.png" alt="Thumbnail 6"></div>
                 </div>
             </div>
             <div class="product-info">
@@ -197,64 +179,63 @@
         </div>
     </section>
 
+    
     <section class="video-section">
         <div class="container">
             <h2>🎥 Video thực tế từ khách hàng</h2>
-            <div id="video-slider" class="slider-wrapper">
-                <div class="slider-container">
-                    <div class="slider-inner">
-                        <div class="slider-item video-thumbnail" data-video-src="assets/v4.mp4"><img src="assets/1.png" alt="Thumbnail video 1"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
-                        <div class="slider-item video-thumbnail" data-video-src="assets/v3.mp4"><img src="assets/2.png" alt="Thumbnail video 2"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
-                        <div class="slider-item video-thumbnail" data-video-src="assets/v2.mp4"><img src="assets/3.png" alt="Thumbnail video 3"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
-                        <div class="slider-item video-thumbnail" data-video-src="assets/v1.mp4"><img src="assets/4.png" alt="Thumbnail video 4"><div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div></div>
-                    </div>
+            <div class="video-slider">
+                <div class="carousel-cell">
+                    <video class="video-item" src="assets/videos/v1.mp4" muted loop playsinline></video>
                 </div>
-                <div class="slider-controls">
-                    <button class="prev-btn"></button>
-                    <button class="next-btn"></button>
+                <div class="carousel-cell">
+                    <video class="video-item" src="assets/videos/v2.mp4" muted loop playsinline></video>
                 </div>
-                <div class="slider-pagination"></div>
+                <div class="carousel-cell">
+                    <iframe class="video-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </section>
+
     
     <section class="review-section">
         <div class="container">
             <h2>✨ Trải nghiệm thực tế từ khách hàng</h2>
-            <div id="review-slider" class="slider-wrapper">
-                <div class="slider-container">
-                    <div class="slider-inner">
-                        <div class="slider-item review-card">
-                             <img src="assets/1.png" alt="Review Image 1">
-                            <p class="name">Nguyễn Thảo</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
-                        </div>
-                        <div class="slider-item review-card">
-                             <img src="assets/3.png" alt="Review Image 2">
-                            <p class="name">Thu Hà</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="content">"Hộp giúp giữ nóng cả buổi, bé ăn ngon hơn. Inox 304 an toàn nên yên tâm."</p>
-                        </div>
-                        <div class="slider-item review-card">
-                             <img src="assets/6.png" alt="Review Image 3">
-                            <p class="name">Minh Khoa</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="content">"Sản phẩm chắc chắn, giữ nhiệt cực tốt. Giao hàng nhanh và đóng gói cẩn thận."</p>
-                        </div>
-                        <div class="slider-item review-card">
-                             <img src="assets/1.png" alt="Review Image 4">
-                            <p class="name">Nguyễn Thảo</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
-                        </div>
+            <div class="review-slider">
+                <div class="carousel-cell">
+                    <div class="review-card">
+                        <img src="assets/1.png" alt="Ảnh review 1">
+                        <p class="name">Nguyễn Thảo</p>
+                        <p class="stars">★★★★★</p>
+                        <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="prev-btn"></button>
-                    <button class="next-btn"></button>
+                <div class="carousel-cell">
+                     <div class="review-card">
+                        <img src="assets/3.png" alt="Ảnh review 2">
+                        <p class="name">Thu Hà</p>
+                        <p class="stars">★★★★★</p>
+                        <p class="content">"Hộp giúp giữ nóng cả buổi, bé ăn ngon hơn. Inox 304 an toàn nên yên tâm."</p>
+                    </div>
                 </div>
-                <div class="slider-pagination"></div>
+                <div class="carousel-cell">
+                     <div class="review-card">
+                        <img src="assets/6.png" alt="Ảnh review 3">
+                        <p class="name">Minh Khoa</p>
+                        <p class="stars">★★★★★</p>
+                        <p class="content">"Sản phẩm chắc chắn, giữ nhiệt cực tốt. Giao hàng nhanh và đóng gói cẩn thận."</p>
+                    </div>
+                </div>
+                 <div class="carousel-cell">
+                    <div class="review-card">
+                        <img src="assets/1.png" alt="Ảnh review 4">
+                        <p class="name">Nguyễn Thảo</p>
+                        <p class="stars">★★★★★</p>
+                        <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -356,166 +337,115 @@
     
     <div class="toast" id="toast-notification">✅ Cảm ơn bạn đã đặt hàng!</div>
 
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // --- HERO SLIDER ---
-        const galleryMain = document.querySelector('.gallery-main');
-        const galleryMainInner = document.querySelector('.gallery-main-inner');
-        const thumbs = document.querySelectorAll('.thumb-item');
-        const imageCounter = document.querySelector('.image-counter');
-        const totalSlides = thumbs.length;
-        let currentIndex = 0;
-        let startX = 0;
-        let isDragging = false;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-
-        function goToSlide(index) {
-            galleryMainInner.style.transform = `translateX(-${index * 100}%)`;
-            thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === index));
-            imageCounter.textContent = `${index + 1} / ${totalSlides}`;
-            currentIndex = index;
-            prevTranslate = -index * galleryMain.offsetWidth;
-        }
-
-        thumbs.forEach((thumb, index) => {
-            thumb.addEventListener('click', () => goToSlide(index));
-        });
-
-        galleryMain.addEventListener('mousedown', (e) => start(e.clientX));
-        galleryMain.addEventListener('touchstart', (e) => start(e.touches[0].clientX), { passive: true });
-        galleryMain.addEventListener('mousemove', (e) => move(e.clientX));
-        galleryMain.addEventListener('touchmove', (e) => move(e.touches[0].clientX));
-        galleryMain.addEventListener('mouseup', end);
-        galleryMain.addEventListener('touchend', end);
-        galleryMain.addEventListener('mouseleave', end);
-
-        function start(x) {
-            isDragging = true;
-            startX = x;
-            galleryMainInner.style.transition = 'none';
-        }
-        function move(x) {
-            if (!isDragging) return;
-            const currentPosition = x;
-            currentTranslate = prevTranslate + currentPosition - startX;
-            galleryMainInner.style.transform = `translateX(${currentTranslate}px)`;
-        }
-        function end() {
-            if (!isDragging) return;
-            isDragging = false;
-            const movedBy = currentTranslate - prevTranslate;
-            if (movedBy < -50 && currentIndex < totalSlides - 1) currentIndex++;
-            if (movedBy > 50 && currentIndex > 0) currentIndex--;
-            goToSlide(currentIndex);
-            galleryMainInner.style.transition = 'transform 0.4s ease';
-        }
         
-        // --- GENERIC SLIDER FUNCTION ---
-        function createSlider(sliderId, config = {}) {
-            const sliderWrapper = document.getElementById(sliderId);
-            if (!sliderWrapper) return;
-            
-            const container = sliderWrapper.querySelector('.slider-container');
-            const inner = sliderWrapper.querySelector('.slider-inner');
-            const items = sliderWrapper.querySelectorAll('.slider-item');
-            const prevBtn = sliderWrapper.querySelector('.prev-btn');
-            const nextBtn = sliderWrapper.querySelector('.next-btn');
-            const pagination = sliderWrapper.querySelector('.slider-pagination');
-            
-            if (!inner || items.length === 0) return;
+        const mainCarousel = document.querySelector('.gallery-main');
+        if (mainCarousel) {
+            const flktyMain = new Flickity( mainCarousel, {
+                cellAlign: 'left',
+                contain: true,
+                wrapAround: true,
+                pageDots: false,
+                prevNextButtons: false
+            });
 
-            let currentIndex = 0;
-            const gap = config.gap || 20;
-
-            function getItemsPerView() {
-                if (window.innerWidth < 768) return config.itemsMobile || 1.05;
-                return config.itemsDesktop || 3;
+            const navCarousel = document.querySelector('.gallery-nav');
+            if (navCarousel) {
+                const flktyNav = new Flickity( navCarousel, {
+                    asNavFor: mainCarousel,
+                    contain: true,
+                    pageDots: false,
+                    prevNextButtons: false
+                });
             }
 
-            function updateSlider() {
-                const itemsPerView = getItemsPerView();
-                const containerWidth = container.offsetWidth;
-                const totalGap = (Math.floor(itemsPerView) - 1) * gap;
-                let slideWidth = (containerWidth - totalGap) / itemsPerView;
-                
-                if (window.innerWidth < 768) {
-                   slideWidth = containerWidth / itemsPerView;
-                }
+            const imageCounter = document.querySelector('.image-counter');
+            flktyMain.on('select', function() {
+                imageCounter.textContent = `${flktyMain.selectedIndex + 1} / ${flktyMain.slides.length}`;
+            });
+        }
+        
+        const reviewSlider = document.querySelector('.review-slider');
+        if (reviewSlider) {
+            const flktyReview = new Flickity( reviewSlider, {
+                 cellAlign: 'left',
+                 contain: true,
+                 groupCells: true,
+                 pageDots: true,
+                 prevNextButtons: true,
+                 wrapAround: true
+            });
+        }
+        
+        
+        const videoSlider = document.querySelector('.video-slider');
+        if (videoSlider) {
+            const flktyVideo = new Flickity(videoSlider, {
+                cellAlign: 'left',
+                contain: true,
+                pageDots: true,
+                prevNextButtons: true,
+                wrapAround: true
+            });
 
+            const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+            const videos = document.querySelectorAll('.video-item');
 
-                items.forEach(item => { item.style.minWidth = `${slideWidth}px`; });
-
-                const maxIndex = items.length - Math.floor(itemsPerView);
-                if (currentIndex > maxIndex) currentIndex = maxIndex;
-
-                inner.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
-
-                if (pagination) {
-                    pagination.innerHTML = '';
-                    for (let i = 0; i <= maxIndex; i++) {
-                        const dot = document.createElement('button');
-                        dot.classList.add('dot');
-                        if (i === currentIndex) dot.classList.add('active');
-                        dot.addEventListener('click', () => { currentIndex = i; updateSlider(); });
-                        pagination.appendChild(dot);
+            videos.forEach(v => {
+                if (v.tagName === 'VIDEO') {
+                    if (!isMobile) {
+                        v.play().catch(()=>{});
+                    } else {
+                        v.addEventListener('click', () => {
+                            if (v.paused) v.play(); else v.pause();
+                        });
                     }
                 }
-            }
-            
-            prevBtn.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; updateSlider(); } });
-            nextBtn.addEventListener('click', () => { if (currentIndex < items.length - getItemsPerView()) { currentIndex++; updateSlider(); } });
+            });
 
-             let isDragging = false, startX = 0, currentTranslate = 0, initialTranslate = 0;
-             container.addEventListener('mousedown', e => dragStart(e.clientX));
-             container.addEventListener('touchstart', e => dragStart(e.touches[0].clientX), { passive: true });
-             container.addEventListener('mousemove', e => dragMove(e.clientX));
-             container.addEventListener('touchmove', e => dragMove(e.touches[0].clientX));
-             container.addEventListener('mouseup', dragEnd);
-             container.addEventListener('touchend', dragEnd);
-             container.addEventListener('mouseleave', dragEnd);
-
-             function dragStart(x) { isDragging = true; startX = x; inner.style.transition = 'none'; initialTranslate = -currentIndex * (inner.querySelector('.slider-item').offsetWidth + gap); }
-             function dragMove(x) { if (!isDragging) return; currentTranslate = initialTranslate + x - startX; inner.style.transform = `translateX(${currentTranslate}px)`; }
-             function dragEnd() {
-                 if (!isDragging) return;
-                 isDragging = false;
-                 const movedBy = currentTranslate - initialTranslate;
-                 if (movedBy < -50 && currentIndex < items.length - getItemsPerView()) currentIndex++;
-                 if (movedBy > 50 && currentIndex > 0) currentIndex--;
-                 inner.style.transition = 'transform 0.4s ease';
-                 updateSlider();
-             }
-
-            window.addEventListener('resize', updateSlider);
-            updateSlider();
+            flktyVideo.on('change', index => {
+                videos.forEach((v,i) => {
+                    if (v.tagName === 'VIDEO') {
+                        if (i === index && !isMobile) {
+                            v.play().catch(()=>{});
+                        } else {
+                            v.pause();
+                        }
+                    }
+                });
+            });
         }
 
-        createSlider('review-slider', { itemsDesktop: 3, itemsMobile: 1.05, gap: 20 });
-        createSlider('video-slider', { itemsDesktop: 3, itemsMobile: 2.5, gap: 20 });
-        
 
-        // --- Video Lightbox Logic ---
         const videoThumbnails = document.querySelectorAll('.video-thumbnail');
         const lightbox = document.getElementById('video-lightbox');
         const lightboxVideo = lightbox.querySelector('video');
         const lightboxClose = lightbox.querySelector('.lightbox-close');
-        
+
         videoThumbnails.forEach(thumb => {
             thumb.addEventListener('click', () => {
                 const videoSrc = thumb.dataset.videoSrc;
                 lightboxVideo.src = videoSrc;
                 lightbox.style.display = 'flex';
                 setTimeout(() => lightbox.classList.add('visible'), 10);
+                const playPromise = lightboxVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Video autoplay was prevented. User needs to press play.", error);
+                    });
+                }
             });
         });
 
         function closeLightbox() {
             lightbox.classList.remove('visible');
-            setTimeout(() => {
+             setTimeout(() => {
                 lightboxVideo.pause();
                 lightboxVideo.src = "";
-                lightbox.style.display = 'none';
+                lightbox.style.display = 'none'; 
             }, 300);
         }
         lightboxClose.addEventListener('click', closeLightbox);
@@ -523,8 +453,20 @@
             if (e.target === lightbox) closeLightbox();
         });
         
-        // --- COUNTDOWN, FAQ, MODAL, FORM (No change) ---
-        (function() {
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const answer = faqItem.querySelector('.faq-answer');
+                faqItem.classList.toggle('active');
+                if (faqItem.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = '0px';
+                }
+            });
+        });
+
+        function startCountdown() {
             const countdownElement = document.getElementById('countdown');
             if(!countdownElement) return;
             const duration = 30 * 60;
@@ -544,20 +486,8 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 countdownElement.innerHTML = `Ưu đãi kết thúc sau: <span>00</span>:<span>${String(minutes).padStart(2, '0')}</span>:<span>${String(seconds).padStart(2, '0')}</span>`;
             }, 1000);
-        })();
-
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                const answer = faqItem.querySelector('.faq-answer');
-                faqItem.classList.toggle('active');
-                if (faqItem.classList.contains('active')) {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                } else {
-                    answer.style.maxHeight = '0px';
-                }
-            });
-        });
+        }
+        startCountdown();
 
         const modal = document.getElementById('order-modal');
         const openButtons = document.querySelectorAll('.open-form-button');
