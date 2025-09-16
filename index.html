@@ -116,7 +116,23 @@
         }
         .toast { position: fixed; top: 20px; right: 20px; background-color: #28a745; color: white; padding: 15px 20px; border-radius: 8px; z-index: 2000; opacity: 0; transform: translateY(-30px); transition: opacity 0.3s, transform 0.3s; }
         .toast.show { opacity: 1; transform: translateY(0); }
-    </style>
+    
+
+.video-item {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+}
+.carousel-cell {
+  width: 80%;
+  margin-right: 10px;
+}
+@media(min-width: 768px) {
+  .carousel-cell {
+    width: 30%;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -180,24 +196,47 @@
     </section>
 
     
-    <section class="video-section">
-        <div class="container">
-            <h2>🎥 Video thực tế từ khách hàng</h2>
-            <div class="video-slider">
-                <div class="carousel-cell">
-                    <video class="video-item" src="assets/videos/v1.mp4" muted loop playsinline></video>
-                </div>
-                <div class="carousel-cell">
-                    <video class="video-item" src="assets/videos/v2.mp4" muted loop playsinline></video>
-                </div>
-                <div class="carousel-cell">
-                    <iframe class="video-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
-                </div>
+    
+<section class="video-section">
+    <div class="container">
+        <h2>🎥 Video thực tế từ khách hàng</h2>
+        <div class="video-slider">
+            <div class="carousel-cell">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/G4EpcYIJP7I"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="carousel-cell">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/FPEZ9hcpKlA"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="carousel-cell">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/EzoxnH0-9Pg"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="carousel-cell">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/IDhLryG2xUY"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     
     <section class="review-section">
