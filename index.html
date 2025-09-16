@@ -132,6 +132,23 @@
     width: 30%;
   }
 }
+
+
+.video-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.video-item {
+  width: 100%;
+  aspect-ratio: 9/16;
+  border-radius: 12px;
+}
+@media(min-width: 768px) {
+  .video-slide {
+    width: 30%;
+  }
+}
 </style>
 </head>
 <body>
@@ -197,45 +214,52 @@
 
     
     
+
 <section class="video-section">
     <div class="container">
         <h2>🎥 Video thực tế từ khách hàng</h2>
-        <div class="video-slider">
-            <div class="carousel-cell">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/G4EpcYIJP7I"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
+        <div class="video-slider swiper" id="videoSwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide video-slide">
+                    <iframe class="video-item"
+                        src="https://www.youtube.com/embed/G4EpcYIJP7I?rel=0"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="swiper-slide video-slide">
+                    <iframe class="video-item"
+                        src="https://www.youtube.com/embed/FPEZ9hcpKlA?rel=0"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="swiper-slide video-slide">
+                    <iframe class="video-item"
+                        src="https://www.youtube.com/embed/EzoxnH0-9Pg?rel=0"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="swiper-slide video-slide">
+                    <iframe class="video-item"
+                        src="https://www.youtube.com/embed/IDhLryG2xUY?rel=0"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
-            <div class="carousel-cell">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/FPEZ9hcpKlA"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="carousel-cell">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/EzoxnH0-9Pg"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="carousel-cell">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/IDhLryG2xUY"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </div>
 </section>
+
 
 
     
