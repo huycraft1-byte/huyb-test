@@ -135,13 +135,15 @@
 
 
 .video-slide {
-  width: 80%; /* mobile: 1 video lộ mép */
-  max-width: 320px;
+  flex-shrink: 0;
+  width: 80%; /* Mobile: chiếm 80% ngang */
+  max-width: 360px;
 }
 
 @media(min-width: 768px) {
   .video-slide {
     width: 30%; /* PC: 2–3 video */
+    max-width: 400px;
   }
 }
 
