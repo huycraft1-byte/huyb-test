@@ -135,18 +135,20 @@
 
 
 .video-slide {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
+
 .video-item {
-  width: 100%;
+  width: auto;
+  height: 60vh; /* cao 60% màn hình */
   aspect-ratio: 9/16;
   border-radius: 12px;
 }
 @media(min-width: 768px) {
-  .video-slide {
-    width: 30%;
+  .video-item {
+    height: 70vh; /* PC cho cao hơn */
   }
 }
 </style>
