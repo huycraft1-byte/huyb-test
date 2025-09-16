@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cặp lồng giữ nhiệt Kela Đức 1,2L</title>
     
-    <!-- Flickity CSS -->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
     <style>
@@ -118,41 +117,36 @@
         .toast.show { opacity: 1; transform: translateY(0); }
     
 
-.video-item {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 12px;
-}
-.carousel-cell {
-  width: 80%;
-  margin-right: 10px;
-}
-@media(min-width: 768px) {
-  .carousel-cell {
-    width: 30%;
-  }
-}
+        /* === Bắt đầu đoạn mã sửa lỗi video === */
+        .video-slide {
+          /* Tăng chiều rộng của mỗi video trên di động */
+          width: 80%; 
+          margin-right: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
+        .video-item {
+          width: 100%;
+          /* Đặt đúng tỷ lệ khung hình dọc 9:16 */
+          aspect-ratio: 9 / 16; 
+          border-radius: 12px;
+        }
+        
+        /* Thêm CSS để sửa lỗi không vuốt được video */
+        .video-slider .video-item.is-dragging {
+            pointer-events: none;
+        }
 
-.video-slide {
-  flex-shrink: 0;
-  width: 80%; /* Mobile: chiếm 80% ngang */
-  max-width: 360px;
-}
-
-@media(min-width: 768px) {
-  .video-slide {
-    width: 30%; /* PC: 2–3 video */
-    max-width: 400px;
-  }
-}
-
-.video-item {
-  width: 100%;
-  aspect-ratio: 9/16;
-  border-radius: 12px;
-}
-</style>
+        /* Giữ nguyên kích thước trên máy tính */
+        @media(min-width: 768px) {
+          .video-slide {
+            width: 30%;
+          }
+        }
+        /* === Kết thúc đoạn mã sửa lỗi video === */
+    </style>
 </head>
 <body>
 
@@ -217,48 +211,42 @@
 
     
     
-
 <section class="video-section">
     <div class="container">
         <h2>🎥 Video thực tế từ khách hàng</h2>
-        <div class="video-slider swiper" id="videoSwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide video-slide">
-                    <iframe class="video-item"
-                        src="https://www.youtube.com/embed/G4EpcYIJP7I?rel=0"
-                        frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="swiper-slide video-slide">
-                    <iframe class="video-item"
-                        src="https://www.youtube.com/embed/FPEZ9hcpKlA?rel=0"
-                        frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="swiper-slide video-slide">
-                    <iframe class="video-item"
-                        src="https://www.youtube.com/embed/EzoxnH0-9Pg?rel=0"
-                        frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="swiper-slide video-slide">
-                    <iframe class="video-item"
-                        src="https://www.youtube.com/embed/IDhLryG2xUY?rel=0"
-                        frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+        <div class="video-slider">
+            <div class="video-slide">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/G4EpcYIJP7I?rel=0"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="video-slide">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/FPEZ9hcpKlA?rel=0"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-slide">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/EzoxnH0-9Pg?rel=0"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-slide">
+                <iframe class="video-item"
+                    src="https://www.youtube.com/embed/IDhLryG2xUY?rel=0"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </div>
 </section>
@@ -457,6 +445,22 @@
                 wrapAround: true
             });
 
+            // === Bắt đầu mã sửa lỗi vuốt video ===
+            const videoIFrames = videoSlider.querySelectorAll('.video-item');
+
+            flktyVideo.on('dragStart', () => {
+                videoIFrames.forEach(iframe => {
+                    iframe.classList.add('is-dragging');
+                });
+            });
+
+            flktyVideo.on('dragEnd', () => {
+                videoIFrames.forEach(iframe => {
+                    iframe.classList.remove('is-dragging');
+                });
+            });
+            // === Kết thúc mã sửa lỗi vuốt video ===
+
             const isMobile = /Mobi|Android/i.test(navigator.userAgent);
             const videos = document.querySelectorAll('.video-item');
 
@@ -604,4 +608,3 @@
     </script>
 </body>
 </html>
-
