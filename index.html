@@ -146,6 +146,53 @@
         }
         /* === Kết thúc CSS cho Slider Video === */
 
+        @media(min-width: 992px) {
+            .hero-section {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .hero-section .container {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                max-width: 1400px;
+                width: 100%;
+                height: 100%;
+            }
+            .product-gallery {
+                flex: 0 0 55%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .product-gallery img {
+                max-height: 80vh;
+                object-fit: contain;
+            }
+            .product-info {
+                flex: 0 0 40%;
+            }
+            .product-info h1 {
+                font-size: 48px;
+                font-weight: 900;
+                line-height: 1.2;
+            }
+            .product-info .new-price {
+                font-size: 42px;
+            }
+            .product-info .old-price {
+                font-size: 24px;
+            }
+            .cta-button {
+                font-size: 22px;
+                padding: 18px 40px;
+            }
+        }
+
+
         .thankyou-modal {
             position: fixed;
             top: 0; left: 0;
