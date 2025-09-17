@@ -19,11 +19,16 @@
             --border-radius: 16px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { 
+        html { 
             scroll-behavior: smooth; 
+        }
+        body { 
+            font-family: var(--font-main); 
+            color: var(--color-text); 
+            line-height: 1.6; 
+            background-color: var(--color-light); 
             overflow-x: hidden; /* KHÓA CUỘN NGANG */
         }
-        body { font-family: var(--font-main); color: var(--color-text); line-height: 1.6; background-color: var(--color-light); }
         .container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
         section { padding: 50px 0; }
         h1, h2, h3 { line-height: 1.3; font-weight: 700; }
@@ -31,34 +36,92 @@
         img { max-width: 100%; height: auto; display: block; }
         .cta-button { display: inline-block; background-color: var(--color-primary); color: var(--color-light); font-size: 18px; font-weight: bold; text-align: center; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; width: 100%; transition: transform 0.2s, box-shadow 0.2s; }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(255, 77, 77, 0.4); }
-        .hero-section { background-color: var(--color-grey); padding-top: 30px; }
-        .hero-section .container { display: flex; flex-direction: column; gap: 30px; }
+        
+        /* === FINAL LAYOUT - BÁM SÁT MẪU === */
+
+        .top-bar-sticky {
+            background-color: var(--color-primary);
+            color: var(--color-light);
+            text-align: center;
+            padding: 14px 10px;
+            font-weight: bold;
+            font-size: 17px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        
+        .hero-section { 
+            background-color: var(--color-grey); 
+            padding: 30px 0; 
+        }
+        .hero-section .container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 30px; 
+            width: 100%; 
+        }
         .product-gallery { flex: 1; position: relative; }
+        .product-info { flex: 1; }
+        
+        @media (min-width: 992px) {
+            .hero-section {
+                padding: 80px 40px; /* Dùng padding lớn để tạo không gian */
+                display: flex;
+                justify-content: center;
+            }
+            .hero-section .container {
+                flex-direction: row;
+                align-items: flex-start; /* Căn lề trên */
+                gap: 60px;
+                max-width: 1280px; /* Đặt lại chiều rộng tối đa hợp lý */
+                width: 100%;
+                padding: 0; 
+            }
+            .product-gallery, .product-info {
+                flex: 1 1 0;
+                max-width: 50%;
+            }
+            .product-info h1 { font-size: 42px; }
+            .product-info .new-price { font-size: 38px; }
+        }
+        
+        .footer h3 { font-size: 22px; margin-bottom: 10px; }
+        .footer p, .footer-usp-item, .footer-contact p { font-size: 17px; line-height: 1.7; }
+        
+        /* === GIỮ NGUYÊN CÁC CSS CŨ & CSS TỪ CHECKLIST === */
+        
         .gallery-main .carousel-cell { width: 100%; aspect-ratio: 1/1; }
         .gallery-main .carousel-cell img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius); }
         .gallery-nav .carousel-cell { width: 16.66%; aspect-ratio: 1/1; margin-right: 10px; cursor: pointer; opacity: 0.6; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
         .gallery-nav .carousel-cell.is-nav-selected { opacity: 1; border-color: var(--color-primary); }
         .gallery-nav .carousel-cell img { width: 100%; height: 100%; object-fit: cover; }
         .image-counter { position: absolute; bottom: 15px; right: 15px; background-color: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 14px; z-index: 10; }
-        .product-info { flex: 1; }
+        
         .product-info h1 { font-size: 26px; margin-bottom: 10px; }
-        .product-info .price { margin-bottom: 15px; }
+        .product-info .price { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;}
         .product-info .new-price { font-size: 32px; font-weight: bold; color: var(--color-primary); }
-        .product-info .old-price { font-size: 18px; text-decoration: line-through; color: #999; margin-left: 10px; }
+        .product-info .old-price { font-size: 18px; text-decoration: line-through; color: #999; }
+        .discount-tag { background-color: var(--color-primary); color: var(--color-light); font-size: 14px; font-weight: bold; padding: 4px 10px; border-radius: 6px; display: inline-block; }
+        
         .usp-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; font-size: 14px; text-align: left; background-color: #fffbe6; border: 1px solid #ffe58f; border-radius: 8px; padding: 15px; }
         .usp-quick-item { display: flex; align-items: center; gap: 8px; }
         .usp-quick-item svg { width: 24px; height: 24px; flex-shrink: 0; fill: #faad14; }
+        
+        .viewer-count { text-align: center; font-weight: 500; margin: 15px 0 0 0; color: #38a169; }
         .countdown { text-align: center; margin-top: 15px; font-size: 16px; font-weight: bold; }
         .countdown span { background-color: var(--color-dark); color: var(--color-light); padding: 5px 8px; border-radius: 4px; margin: 0 3px; }
+
         @media (min-width: 768px) {
-            .hero-section .container { flex-direction: row; align-items: flex-start; }
             section { padding: 60px 0; }
             h2 { font-size: 32px; margin-bottom: 40px; }
         }
+
         .description-section .container { max-width: 800px; }
         .usp-item { margin: 0 auto 40px auto; max-width: 100%; text-align: center; }
-        .usp-item h3 { font-size: 22px; margin-bottom: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-        .usp-item p { text-align: justify; margin-bottom: 15px; }
+        .usp-item h3 { font-size: 28px; margin-bottom: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .usp-item p { text-align: justify; margin-bottom: 15px; font-size: 18px; line-height: 1.8; }
         .usp-item img { border-radius: var(--border-radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; margin: 0 auto; }
         .video-section, .review-section { background-color: var(--color-grey); }
         .review-slider .carousel-cell { width: 95%; margin-right: 15px; }
@@ -69,375 +132,212 @@
         .review-card .stars { color: #fadb14; margin: 5px 0; }
         .video-slider .carousel-cell { width: 45%; margin-right: 15px; }
         @media (min-width: 768px) { .video-slider .carousel-cell { width: calc( (100% - 40px) / 3 ); } }
-        .video-thumbnail { position: relative; cursor: pointer; overflow: hidden; border-radius: var(--border-radius); box-shadow: var(--shadow); aspect-ratio: 9 / 16; }
-        .video-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
-        .video-thumbnail .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-        .video-thumbnail:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); }
-        .play-icon svg { width: 30px; height: 30px; fill: var(--color-primary); }
+        
         .faq-item { border-bottom: 1px solid #eee; }
         .faq-question { padding: 15px 0; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-question::before { content: '❓'; margin-right: 10px; }
         .faq-question::after { content: '+'; font-size: 24px; transition: transform 0.3s; }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding-left: 30px; }
-        .modal-overlay, .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
-        .modal-overlay.visible, .lightbox-overlay.visible { display: flex; opacity: 1; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.visible { display: flex; opacity: 1; }
         .modal-content { background: var(--color-light); padding: 25px; border-radius: var(--border-radius); box-shadow: 0 5px 20px rgba(0,0,0,0.2); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s; }
-        .lightbox-content { position: relative; width: 90%; max-width: 800px; aspect-ratio: 16 / 9; transform: scale(0.9); transition: transform 0.3s; }
-        .modal-overlay.visible .modal-content, .lightbox-overlay.visible .lightbox-content { transform: scale(1); }
-        .modal-close, .lightbox-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 20px; cursor: pointer; line-height: 30px; text-align: center; }
-        .lightbox-close { top: -15px; right: -15px; background: white; color: black; }
-        .lightbox-content video { width: 100%; height: 100%; border-radius: var(--border-radius); }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 20px; cursor: pointer; line-height: 30px; text-align: center; }
         .modal-content h2 { text-align: left; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2); }
         .form-group textarea { resize: vertical; min-height: 80px; }
+        
+        .final-cta-section { background-color: var(--color-grey); text-align: center; }
+        .final-cta-section h2 { font-size: 30px; margin-bottom: 20px; }
+        .final-cta-section .cta-button { max-width: 350px; }
+
         .footer { background: #1c1c1c; color: #ccc; padding: 40px 0 20px; }
         .footer .container { display: flex; flex-direction: column; gap: 30px; }
-        .footer-usp { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; font-size: 14px; }
-        .footer-usp-item span { font-size: 24px; display: block; margin-bottom: 5px; }
+        .footer-usp { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; }
         .footer-info, .footer-contact { text-align: center; }
-        .footer-info img { max-width: 120px; margin: 0 auto 10px; }
-        .footer-info p { font-size: 14px; margin-bottom: 10px; }
-        .footer-contact p { margin-bottom: 5px; }
+        
         @media (min-width: 768px) {
-            .footer .container { flex-direction: row; justify-content: space-between; }
+            .footer .container { flex-direction: row; justify-content: space-between; align-items: center; }
             .footer-left, .footer-right { flex: 1; }
             .footer-info, .footer-contact { text-align: left; }
-            .footer-info img { margin: 0 0 10px 0; }
         }
+
         .sticky-cta-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--color-light); padding: 10px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 999; display: none; }
-        @media (max-width: 767px) {
+        @media (max-width: 991px) { /* Điều chỉnh breakpoint cho hợp lý */
             .sticky-cta-bar { display: block; }
             body { padding-bottom: 80px; }
         }
-        .toast { position: fixed; top: 20px; right: 20px; background-color: #28a745; color: white; padding: 15px 20px; border-radius: 8px; z-index: 2000; opacity: 0; transform: translateY(-30px); transition: opacity 0.3s, transform 0.3s; }
-        .toast.show { opacity: 1; transform: translateY(0); }
-    
-
-        /* === CSS cho Slider Video === */
-        .video-slide {
-          width: 80%;
-          margin-right: 15px;
-          
-          /* === Mã thêm viền trắng để vuốt được === */
-          padding: 10px;
-          background-color: var(--color-light);
-          border-radius: var(--border-radius);
-          box-shadow: var(--shadow);
-        }
-
-        .video-item {
-          width: 100%;
-          aspect-ratio: 9 / 16; 
-          border-radius: 12px; /* Bo góc nhỏ hơn viền ngoài một chút cho đẹp */
-        }
         
-        .video-slider .video-item.is-dragging {
-            pointer-events: none;
-        }
+        .video-slide { width: 80%; margin-right: 15px; padding: 10px; background-color: var(--color-light); border-radius: var(--border-radius); box-shadow: var(--shadow); }
+        .video-item { width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; }
+        .video-slider .video-item.is-dragging { pointer-events: none; }
+        @media(min-width: 768px) { .video-slide { width: 30%; } }
 
-        @media(min-width: 768px) {
-          .video-slide {
-            width: 30%;
-          }
-        }
-        /* === Kết thúc CSS cho Slider Video === */
-
-        @media(min-width: 992px) {
-            .hero-section {
-                min-height: 100vh;
-                display: flex;
-                align-items: flex-start; /* căn lề trên thay vì giữa */
-                justify-content: center;
-                padding-top: 40px;
-            }
-            .hero-section .container {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: space-between;
-                max-width: 1400px;
-                width: 100%;
-            }
-            .product-gallery {
-                flex: 0 0 55%;
-            }
-            .product-info {
-                flex: 0 0 40%;
-            }
-            .product-info h1 {
-                font-size: 48px;
-                font-weight: 900;
-                line-height: 1.2;
-                margin-bottom: 20px;
-            }
-            .product-info .new-price {
-                font-size: 42px;
-            }
-            .product-info .old-price {
-                font-size: 24px;
-            }
-            .cta-button {
-                font-size: 22px;
-                padding: 18px 40px;
-            }
-            .viewer-count {
-                margin: 15px 0;
-                font-size: 18px;
-            }
-            .countdown {
-                font-size: 20px;
-                font-weight: bold;
-                margin-top: 10px;
-                color: #ff4d4d;
-            }
-        }
-
-
-        .thankyou-modal {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: none; align-items: center; justify-content: center;
-            z-index: 2000;
-        }
-        .thankyou-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            font-size: 18px;
-        }
-        .thankyou-content button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #ff4d4d;
-            border: none;
-            color: #fff;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-
-        .footer-info p, .footer-contact p, .footer-usp { font-size: 18px !important; }
-
-
-        .viewer-count {
-            margin-top: 10px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-
-        .discount-tag {
-            background: #ff4d4d;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 4px 10px;
-            margin-left: 10px;
-            border-radius: 4px;
-        }
-
-
-        @media(min-width: 992px) {
-            .product-info h1 { font-size: 46px; font-weight: 900; line-height: 1.2; }
-            .product-info .new-price { font-size: 40px; }
-            .product-info .old-price { font-size: 22px; }
-            .cta-button { font-size: 22px; padding: 18px 40px; }
-        }
-
-
-        .top-bar {
-            background-color: #ff4d4d;
-            color: #fff;
-            text-align: center;
-            font-weight: 800;
-            font-size: 26px;
-            padding: 16px 0;
-            letter-spacing: 1px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        #thank-you-modal .modal-content { text-align: center; }
+        #thank-you-modal h2 { font-size: 24px; margin-bottom: 15px; text-align: center; }
+        #thank-you-modal p { font-size: 16px; margin-bottom: 25px; }
+        #thank-you-modal .close-popup-btn { background-color: #ddd; color: #333; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
     </style>
 </head>
 <body>
-<div class="top-bar">🛒 Siêu Thị Gia Đình - An Tâm Mua Sắm</div>
-
-    <section class="hero-section">
-        <div class="container">
-            <div class="product-gallery">
-                <div class="gallery-main">
-                    <div class="carousel-cell"><img src="assets/1.png" alt="Cặp lồng Kela 1"></div>
-                    <div class="carousel-cell"><img src="assets/2.png" alt="Cặp lồng Kela 2"></div>
-                    <div class="carousel-cell"><img src="assets/3.png" alt="Cặp lồng Kela 3"></div>
-                    <div class="carousel-cell"><img src="assets/4.png" alt="Cặp lồng Kela 4"></div>
-                    <div class="carousel-cell"><img src="assets/5.png" alt="Cặp lồng Kela 5"></div>
-                    <div class="carousel-cell"><img src="assets/6.png" alt="Cặp lồng Kela 6"></div>
-                </div>
-                <div class="image-counter">1 / 6</div>
-                <div class="gallery-nav">
-                    <div class="carousel-cell"><img src="assets/1.png" alt="Thumbnail 1"></div>
-                    <div class="carousel-cell"><img src="assets/2.png" alt="Thumbnail 2"></div>
-                    <div class="carousel-cell"><img src="assets/3.png" alt="Thumbnail 3"></div>
-                    <div class="carousel-cell"><img src="assets/4.png" alt="Thumbnail 4"></div>
-                    <div class="carousel-cell"><img src="assets/5.png" alt="Thumbnail 5"></div>
-                    <div class="carousel-cell"><img src="assets/6.png" alt="Thumbnail 6"></div>
-                </div>
-            </div>
-            <div class="product-info">
-                <h1>Cặp lồng giữ nhiệt Kela Đức 1,2L</h1>
-                <div class="price">
-                    <span class="new-price">350.000đ</span>
-                    <span class="old-price">870.000đ</span><span class="discount-tag">Giảm 60%</span>
-                </div>
-                <div class="usp-quick">
-                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4H3M6,18A1,1 0 0,1 5,17A1,1 0 0,1 6,16A1,1 0 0,1 7,17A1,1 0 0,1 6,18M18,18A1,1 0 0,1 17,17A1,1 0 0,1 18,16A1,1 0 0,1 19,17A1,1 0 0,1 18,18M17,10H20L21.5,12H17V10Z" /></svg> <span>Freeship toàn quốc</span></div>
-                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5,8C9.85,8,7.45,8.99,5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22,10.54,10.5,12.5,10.5C16.04,10.5,19.05,12.81,20.1,16L22.47,15.22C21.08,11.03,17.15,8,12.5,8Z" /></svg> <span>Đổi trả trong 3 ngày</span></div>
-                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,1L3,5V11C3,16.55,6.84,21.74,12,23C17.16,21.74,21,16.55,21,11V5L12,1Z" /></svg> <span>Hàng chính hãng</span></div>
-                    <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg> <span>Hỗ trợ 24/7</span></div>
-                </div>
-                <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
-                <div class="viewer-count">🟢 <span id="viewerNumber"></span> người đang xem sản phẩm này</div>
-                <div class="countdown" id="countdown"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="description-section">
-        <div class="container">
-            <div class="usp-item">
-                <h3>🔥 Giữ nhiệt vượt trội cả ngày</h3>
-                <p>Nhờ công nghệ chân không 2 lớp, cặp lồng Kela giúp cơm canh luôn nóng hổi đến trưa, đồng thời giữ lạnh hiệu quả nhiều giờ, mang đến trải nghiệm tiện lợi cho cả gia đình.</p>
-                <img src="assets/1.png" alt="Giữ nhiệt vượt trội">
-            </div>
-            <div class="usp-item">
-                <h3>🛡️ Chất liệu Inox 304 cao cấp</h3>
-                <p>Cặp lồng giữ nhiệt Kela được làm từ thép không gỉ 304, an toàn tuyệt đối cho sức khỏe, chống gỉ sét, bền đẹp theo thời gian. Đây là sự lựa chọn lý tưởng cho những ai quan tâm đến chất lượng và sự bền bỉ.</p>
-                <img src="assets/2.png" alt="Chất liệu Inox 304">
-            </div>
-            <div class="usp-item">
-                <h3>👌 Thiết kế gọn gàng – Tiện lợi</h3>
-                <p>Với thiết kế nhỏ gọn, Kela dễ dàng mang theo đi làm, đi học hay picnic. Đặc biệt, có ngăn đựng thìa inox gấp gọn ngay trong nắp, đảm bảo sạch sẽ và tiện dụng mọi lúc, mọi nơi.</p>
-                <img src="assets/3.png" alt="Thiết kế gọn gàng">
-            </div>
-        </div>
-    </section>
-
-    
-    
-<section class="video-section">
-    <div class="container">
-        <h2>🎥 Video thực tế từ khách hàng</h2>
-        <div class="video-slider">
-            <div class="video-slide">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/G4EpcYIJP7I?rel=0"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="video-slide">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/FPEZ9hcpKlA?rel=0"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="video-slide">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/EzoxnH0-9Pg?rel=0"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="video-slide">
-                <iframe class="video-item"
-                    src="https://www.youtube.com/embed/IDhLryG2xUY?rel=0"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
+    <div class="top-bar-sticky">
+        🛒 Siêu Thị Gia Đình - An Tâm Mua Sắm
     </div>
-</section>
 
-
-
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="product-gallery">
+                    <div class="gallery-main">
+                        <div class="carousel-cell"><img src="assets/1.png" alt="Cặp lồng Kela 1"></div>
+                        <div class="carousel-cell"><img src="assets/2.png" alt="Cặp lồng Kela 2"></div>
+                        <div class="carousel-cell"><img src="assets/3.png" alt="Cặp lồng Kela 3"></div>
+                        <div class="carousel-cell"><img src="assets/4.png" alt="Cặp lồng Kela 4"></div>
+                        <div class="carousel-cell"><img src="assets/5.png" alt="Cặp lồng Kela 5"></div>
+                        <div class="carousel-cell"><img src="assets/6.png" alt="Cặp lồng Kela 6"></div>
+                    </div>
+                    <div class="image-counter">1 / 6</div>
+                    <div class="gallery-nav">
+                        <div class="carousel-cell"><img src="assets/1.png" alt="Thumbnail 1"></div>
+                        <div class="carousel-cell"><img src="assets/2.png" alt="Thumbnail 2"></div>
+                        <div class="carousel-cell"><img src="assets/3.png" alt="Thumbnail 3"></div>
+                        <div class="carousel-cell"><img src="assets/4.png" alt="Thumbnail 4"></div>
+                        <div class="carousel-cell"><img src="assets/5.png" alt="Thumbnail 5"></div>
+                        <div class="carousel-cell"><img src="assets/6.png" alt="Thumbnail 6"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h1>Cặp lồng giữ nhiệt Kela Đức 1,2L</h1>
+                    <div class="price">
+                        <span class="new-price">350.000đ</span>
+                        <span class="old-price">870.000đ</span>
+                        <span class="discount-tag">Giảm 60%</span>
+                    </div>
+                    <div class="usp-quick">
+                        <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4H3M6,18A1,1 0 0,1 5,17A1,1 0 0,1 6,16A1,1 0 0,1 7,17A1,1 0 0,1 6,18M18,18A1,1 0 0,1 17,17A1,1 0 0,1 18,16A1,1 0 0,1 19,17A1,1 0 0,1 18,18M17,10H20L21.5,12H17V10Z" /></svg> <span>Freeship toàn quốc</span></div>
+                        <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5,8C9.85,8,7.45,8.99,5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22,10.54,10.5,12.5,10.5C16.04,10.5,19.05,12.81,20.1,16L22.47,15.22C21.08,11.03,17.15,8,12.5,8Z" /></svg> <span>Đổi trả trong 3 ngày</span></div>
+                        <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,1L3,5V11C3,16.55,6.84,21.74,12,23C17.16,21.74,21,16.55,21,11V5L12,1Z" /></svg> <span>Hàng chính hãng</span></div>
+                        <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg> <span>Hỗ trợ 24/7</span></div>
+                    </div>
+                    <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
+                    <div class="viewer-count" id="viewer-count"></div>
+                    <div class="countdown" id="countdown"></div>
+                </div>
+            </div>
+        </section>
     
-    <section class="review-section">
-        <div class="container">
-            <h2>✨ Trải nghiệm thực tế từ khách hàng</h2>
-            <div class="review-slider">
-                <div class="carousel-cell">
-                    <div class="review-card">
-                        <img src="assets/1.png" alt="Ảnh review 1">
-                        <p class="name">Nguyễn Thảo</p>
-                        <p class="stars">★★★★★</p>
-                        <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
-                    </div>
+        <section class="description-section">
+            <div class="container">
+                <div class="usp-item">
+                    <h3>🔥 Giữ nhiệt vượt trội cả ngày</h3>
+                    <p>Nhờ công nghệ chân không 2 lớp, cặp lồng Kela giúp cơm canh luôn nóng hổi đến trưa, đồng thời giữ lạnh hiệu quả nhiều giờ, mang đến trải nghiệm tiện lợi cho cả gia đình.</p>
+                    <img src="assets/1.png" alt="Giữ nhiệt vượt trội">
                 </div>
-                <div class="carousel-cell">
-                     <div class="review-card">
-                        <img src="assets/3.png" alt="Ảnh review 2">
-                        <p class="name">Thu Hà</p>
-                        <p class="stars">★★★★★</p>
-                        <p class="content">"Hộp giúp giữ nóng cả buổi, bé ăn ngon hơn. Inox 304 an toàn nên yên tâm."</p>
-                    </div>
+                <div class="usp-item">
+                    <h3>🛡️ Chất liệu Inox 304 cao cấp</h3>
+                    <p>Cặp lồng giữ nhiệt Kela được làm từ thép không gỉ 304, an toàn tuyệt đối cho sức khỏe, chống gỉ sét, bền đẹp theo thời gian. Đây là sự lựa chọn lý tưởng cho những ai quan tâm đến chất lượng và sự bền bỉ.</p>
+                    <img src="assets/2.png" alt="Chất liệu Inox 304">
                 </div>
-                <div class="carousel-cell">
-                     <div class="review-card">
-                        <img src="assets/6.png" alt="Ảnh review 3">
-                        <p class="name">Minh Khoa</p>
-                        <p class="stars">★★★★★</p>
-                        <p class="content">"Sản phẩm chắc chắn, giữ nhiệt cực tốt. Giao hàng nhanh và đóng gói cẩn thận."</p>
-                    </div>
+                <div class="usp-item">
+                    <h3>👌 Thiết kế gọn gàng – Tiện lợi</h3>
+                    <p>Với thiết kế nhỏ gọn, Kela dễ dàng mang theo đi làm, đi học hay picnic. Đặc biệt, có ngăn đựng thìa inox gấp gọn ngay trong nắp, đảm bảo sạch sẽ và tiện dụng mọi lúc, mọi nơi.</p>
+                    <img src="assets/3.png" alt="Thiết kế gọn gàng">
                 </div>
-                 <div class="carousel-cell">
-                    <div class="review-card">
-                        <img src="assets/1.png" alt="Ảnh review 4">
-                        <p class="name">Nguyễn Thảo</p>
-                        <p class="stars">★★★★★</p>
-                        <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
+            </div>
+        </section>
+    
+        <section class="video-section">
+            <div class="container">
+                <h2>🎥 Video thực tế từ khách hàng</h2>
+                <div class="video-slider">
+                    <div class="video-slide">
+                        <iframe class="video-item" src="https://www.youtube.com/embed/G4EpcYIJP7I?rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-slide">
+                        <iframe class="video-item" src="https://www.youtube.com/embed/FPEZ9hcpKlA?rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-slide">
+                        <iframe class="video-item" src="https://www.youtube.com/embed/EzoxnH0-9Pg?rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-slide">
+                        <iframe class="video-item" src="https://www.youtube.com/embed/IDhLryG2xUY?rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="container">
-            <h2>Câu hỏi thường gặp</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">Hộp giữ nóng được bao lâu?</div>
-                    <div class="faq-answer"><p>Cặp lồng giữ nhiệt Kela có khả năng giữ nóng từ 4–6 giờ và giữ lạnh 6–8 giờ. Nhờ công nghệ chân không 2 lớp tiên tiến, thực phẩm luôn giữ được độ tươi ngon. Đây là điểm mạnh vượt trội so với nhiều sản phẩm khác trên thị trường.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Có bị tràn khi để trong balo?</div>
-                    <div class="faq-answer"><p>Không. Nắp khóa kín và ron chống tràn được thiết kế đặc biệt giúp bạn yên tâm tuyệt đối khi di chuyển. Dù để trong balo hay túi xách, sản phẩm Kela vẫn giữ an toàn, không lo rò rỉ thực phẩm.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Có kèm thìa không?</div>
-                    <div class="faq-answer"><p>Có. Đi kèm sản phẩm là thìa inox gấp gọn, nằm ngay trong nắp, giúp tiết kiệm không gian và đảm bảo vệ sinh. Đây là chi tiết nhỏ nhưng mang lại sự tiện lợi lớn, thể hiện sự tinh tế trong thiết kế của Kela.</p></div>
+        </section>
+        
+        <section class="review-section">
+            <div class="container">
+                <h2>✨ Trải nghiệm thực tế từ khách hàng</h2>
+                <div class="review-slider">
+                    <div class="carousel-cell">
+                        <div class="review-card">
+                            <img src="assets/1.png" alt="Ảnh review 1">
+                            <p class="name">Nguyễn Thảo</p>
+                            <p class="stars">★★★★★</p>
+                            <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                         <div class="review-card">
+                            <img src="assets/3.png" alt="Ảnh review 2">
+                            <p class="name">Thu Hà</p>
+                            <p class="stars">★★★★★</p>
+                            <p class="content">"Hộp giúp giữ nóng cả buổi, bé ăn ngon hơn. Inox 304 an toàn nên yên tâm."</p>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                         <div class="review-card">
+                            <img src="assets/6.png" alt="Ảnh review 3">
+                            <p class="name">Minh Khoa</p>
+                            <p class="stars">★★★★★</p>
+                            <p class="content">"Sản phẩm chắc chắn, giữ nhiệt cực tốt. Giao hàng nhanh và đóng gói cẩn thận."</p>
+                        </div>
+                    </div>
+                     <div class="carousel-cell">
+                        <div class="review-card">
+                            <img src="assets/1.png" alt="Ảnh review 4">
+                            <p class="name">Nguyễn Thảo</p>
+                            <p class="stars">★★★★★</p>
+                            <p class="content">"Cơm mang từ sáng đến trưa vẫn nóng hổi. Thiết kế gọn gàng, bỏ balo không lo đổ."</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    
+        <section class="faq-section">
+            <div class="container">
+                <h2>Câu hỏi thường gặp</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">Hộp giữ nóng được bao lâu?</div>
+                        <div class="faq-answer"><p>Cặp lồng giữ nhiệt Kela có khả năng giữ nóng từ 4–6 giờ và giữ lạnh 6–8 giờ. Nhờ công nghệ chân không 2 lớp tiên tiến, thực phẩm luôn giữ được độ tươi ngon. Đây là điểm mạnh vượt trội so với nhiều sản phẩm khác trên thị trường.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Có bị tràn khi để trong balo?</div>
+                        <div class="faq-answer"><p>Không. Nắp khóa kín và ron chống tràn được thiết kế đặc biệt giúp bạn yên tâm tuyệt đối khi di chuyển. Dù để trong balo hay túi xách, sản phẩm Kela vẫn giữ an toàn, không lo rò rỉ thực phẩm.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Có kèm thìa không?</div>
+                        <div class="faq-answer"><p>Có. Đi kèm sản phẩm là thìa inox gấp gọn, nằm ngay trong nắp, giúp tiết kiệm không gian và đảm bảo vệ sinh. Đây là chi tiết nhỏ nhưng mang lại sự tiện lợi lớn, thể hiện sự tinh tế trong thiết kế của Kela.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="final-cta-section">
+            <div class="container">
+                <h2>Sẵn sàng đặt hàng ngay hôm nay?</h2>
+                <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -467,13 +367,6 @@
         <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
     </div>
 
-     <div class="lightbox-overlay" id="video-lightbox">
-        <div class="lightbox-content">
-            <video src="" controls muted playsinline></video>
-            <button class="lightbox-close">&times;</button>
-        </div>
-    </div>
-    
     <div class="modal-overlay" id="order-modal">
         <div class="modal-content">
             <button class="modal-close" id="modal-close-button">&times;</button>
@@ -514,18 +407,15 @@
         </div>
     </div>
     
-    
-    <div class="thankyou-modal" id="thankyou-modal">
-        <div class="thankyou-content">
-            <p>✅ Cảm ơn bạn đã đặt hàng thành công!</p>
-            <p>📞 Nhân viên sẽ liên hệ xác nhận đơn hàng trong ít phút tới.</p>
-            <button onclick="closeThankyou()">Đóng</button>
+    <div class="modal-overlay" id="thank-you-modal">
+        <div class="modal-content">
+            <h2>✅ Cảm ơn bạn đã đặt hàng thành công!</h2>
+            <p>📞 Nhân viên của chúng tôi sẽ liên hệ xác nhận đơn hàng trong ít phút tới.</p>
+            <button class="close-popup-btn">Đóng</button>
         </div>
     </div>
 
-
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         
@@ -557,7 +447,7 @@
         
         const reviewSlider = document.querySelector('.review-slider');
         if (reviewSlider) {
-            const flktyReview = new Flickity( reviewSlider, {
+            new Flickity( reviewSlider, {
                  cellAlign: 'left',
                  contain: true,
                  groupCells: true,
@@ -566,7 +456,6 @@
                  wrapAround: true
             });
         }
-        
         
         const videoSlider = document.querySelector('.video-slider');
         if (videoSlider) {
@@ -579,54 +468,14 @@
                 wrapAround: true
             });
 
-            // Đoạn mã này không còn cần thiết vì giải pháp viền trắng đã hiệu quả hơn.
-            // Tuy nhiên, để đó cũng không ảnh hưởng gì.
             const videoIFrames = videoSlider.querySelectorAll('.video-item');
             flktyVideo.on('dragStart', () => {
-                videoIFrames.forEach(iframe => {
-                    iframe.classList.add('is-dragging');
-                });
+                videoIFrames.forEach(iframe => iframe.classList.add('is-dragging'));
             });
             flktyVideo.on('dragEnd', () => {
-                videoIFrames.forEach(iframe => {
-                    iframe.classList.remove('is-dragging');
-                });
+                videoIFrames.forEach(iframe => iframe.classList.remove('is-dragging'));
             });
         }
-
-
-        const videoThumbnails = document.querySelectorAll('.video-thumbnail');
-        const lightbox = document.getElementById('video-lightbox');
-        const lightboxVideo = lightbox.querySelector('video');
-        const lightboxClose = lightbox.querySelector('.lightbox-close');
-
-        videoThumbnails.forEach(thumb => {
-            thumb.addEventListener('click', () => {
-                const videoSrc = thumb.dataset.videoSrc;
-                lightboxVideo.src = videoSrc;
-                lightbox.style.display = 'flex';
-                setTimeout(() => lightbox.classList.add('visible'), 10);
-                const playPromise = lightboxVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log("Video autoplay was prevented. User needs to press play.", error);
-                    });
-                }
-            });
-        });
-
-        function closeLightbox() {
-            lightbox.classList.remove('visible');
-             setTimeout(() => {
-                lightboxVideo.pause();
-                lightboxVideo.src = "";
-                lightbox.style.display = 'none'; 
-            }, 300);
-        }
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
         
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
@@ -664,28 +513,59 @@
         }
         startCountdown();
 
-        const modal = document.getElementById('order-modal');
+        function updateViewerCount() {
+            const viewerCountElement = document.getElementById('viewer-count');
+            if (viewerCountElement) {
+                const randomCount = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+                viewerCountElement.innerHTML = `🟢 <strong>${randomCount}</strong> người đang xem sản phẩm này.`;
+            }
+        }
+        updateViewerCount(); 
+        setInterval(updateViewerCount, 1500);
+
+
+        const orderModal = document.getElementById('order-modal');
         const openButtons = document.querySelectorAll('.open-form-button');
         const closeButton = document.getElementById('modal-close-button');
-        openButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                modal.style.display = 'flex';
-                setTimeout(() => modal.classList.add('visible'), 10);
-            });
-        });
-
-        function closeModal() {
-            modal.classList.remove('visible');
-             setTimeout(() => { modal.style.display = 'none'; }, 300);
+        
+        function openOrderModal() {
+            orderModal.style.display = 'flex';
+            setTimeout(() => orderModal.classList.add('visible'), 10);
         }
-        closeButton.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
+
+        function closeOrderModal() {
+            orderModal.classList.remove('visible');
+             setTimeout(() => { orderModal.style.display = 'none'; }, 300);
+        }
+
+        openButtons.forEach(btn => btn.addEventListener('click', openOrderModal));
+        closeButton.addEventListener('click', closeOrderModal);
+        orderModal.addEventListener('click', (e) => {
+            if (e.target === orderModal) closeOrderModal();
         });
 
         const form = document.getElementById('order-form');
         const submitButton = document.getElementById('submit-button');
-        const toast = document.getElementById('toast-notification');
+        const thankYouModal = document.getElementById('thank-you-modal');
+        let thankYouTimeout;
+
+        function showThankYouModal() {
+            thankYouModal.style.display = 'flex';
+            setTimeout(() => thankYouModal.classList.add('visible'), 10);
+            thankYouTimeout = setTimeout(hideThankYouModal, 4000); // Auto close after 4s
+        }
+
+        function hideThankYouModal() {
+            clearTimeout(thankYouTimeout);
+            thankYouModal.classList.remove('visible');
+            setTimeout(() => { thankYouModal.style.display = 'none'; }, 300);
+        }
+
+        thankYouModal.querySelector('.close-popup-btn').addEventListener('click', hideThankYouModal);
+        thankYouModal.addEventListener('click', (e) => {
+            if (e.target === thankYouModal) hideThankYouModal();
+        });
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             submitButton.disabled = true;
@@ -702,29 +582,12 @@
             })
             .finally(() => {
                 form.reset();
-                closeModal();
-                const modalTy = document.getElementById('thankyou-modal');
-                modalTy.style.display = 'flex';
-                setTimeout(() => { modalTy.style.display = 'none'; }, 4000);
+                closeOrderModal();
+                showThankYouModal(); 
                 submitButton.disabled = false;
                 submitButton.textContent = 'Xác nhận đặt hàng';
             });
-        
-        // Viewer random
-        const viewerNumber = document.getElementById('viewerNumber');
-        function randomViewer(){
-            const num = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
-            viewerNumber.textContent = num;
-        }
-        setInterval(randomViewer, 1000);
-        randomViewer();
-
-        // Thankyou popup
-        function closeThankyou(){
-            document.getElementById('thankyou-modal').style.display = 'none';
-        }
-
-});
+        });
     });
     </script>
 </body>
