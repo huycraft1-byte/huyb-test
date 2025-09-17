@@ -117,38 +117,148 @@
         .toast.show { opacity: 1; transform: translateY(0); }
     
 
-        /* === Bắt đầu đoạn mã sửa lỗi video === */
+        /* === CSS cho Slider Video === */
         .video-slide {
-          /* Tăng chiều rộng của mỗi video trên di động */
-          width: 80%; 
+          width: 80%;
           margin-right: 15px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          
+          /* === Mã thêm viền trắng để vuốt được === */
+          padding: 10px;
+          background-color: var(--color-light);
+          border-radius: var(--border-radius);
+          box-shadow: var(--shadow);
         }
 
         .video-item {
           width: 100%;
-          /* Đặt đúng tỷ lệ khung hình dọc 9:16 */
           aspect-ratio: 9 / 16; 
-          border-radius: 12px;
+          border-radius: 12px; /* Bo góc nhỏ hơn viền ngoài một chút cho đẹp */
         }
         
-        /* Thêm CSS để sửa lỗi không vuốt được video */
         .video-slider .video-item.is-dragging {
             pointer-events: none;
         }
 
-        /* Giữ nguyên kích thước trên máy tính */
         @media(min-width: 768px) {
           .video-slide {
             width: 30%;
           }
         }
-        /* === Kết thúc đoạn mã sửa lỗi video === */
+        /* === Kết thúc CSS cho Slider Video === */
+
+        /* Top bar */
+        .top-bar {
+            background-color: #ff4d4d;
+            color: #fff;
+            text-align: center;
+            padding: 8px 0;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Hero full screen */
+        .hero-section {
+            background-color: var(--color-grey);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-section .container {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Sticker giảm giá */
+        .discount-tag {
+            display: inline-block;
+            background: #ff4d4d;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 4px 0 0 4px;
+            margin-left: 10px;
+        }
+
+        /* Viewer count */
+        .viewer-count {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .viewer-count span {
+            color: green;
+            font-size: 20px;
+        }
+
+        /* USP phóng to text */
+        .usp-item h3 {
+            font-size: 30px !important;
+        }
+        .usp-item p {
+            font-size: 18px !important;
+            line-height: 1.8;
+        }
+
+        /* CTA cuối */
+        .final-cta {
+            text-align: center;
+            padding: 50px 20px;
+            background: #fff5f5;
+        }
+        .final-cta h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer text to hơn */
+        .footer {
+            font-size: 16px;
+        }
+        .footer h3 {
+            font-size: 20px;
+        }
+
+        /* Popup cảm ơn */
+        .thankyou-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            display: none;
+        }
+        .thankyou-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .thankyou-content button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
+<div class="top-bar">🛒 Siêu Thị Gia Đình - An Tâm Mua Sắm</div>
 
     <section class="hero-section">
         <div class="container">
@@ -175,7 +285,7 @@
                 <h1>Cặp lồng giữ nhiệt Kela Đức 1,2L</h1>
                 <div class="price">
                     <span class="new-price">350.000đ</span>
-                    <span class="old-price">870.000đ</span>
+                    <span class="old-price">870.000đ</span><span class="discount-tag">Giảm 60%</span>
                 </div>
                 <div class="usp-quick">
                     <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4H3M6,18A1,1 0 0,1 5,17A1,1 0 0,1 6,16A1,1 0 0,1 7,17A1,1 0 0,1 6,18M18,18A1,1 0 0,1 17,17A1,1 0 0,1 18,16A1,1 0 0,1 19,17A1,1 0 0,1 18,18M17,10H20L21.5,12H17V10Z" /></svg> <span>Freeship toàn quốc</span></div>
@@ -184,6 +294,7 @@
                     <div class="usp-quick-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg> <span>Hỗ trợ 24/7</span></div>
                 </div>
                 <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
+                <div class="viewer-count">🟢 <span id="viewerNumber"></span> người đang xem sản phẩm này</div>
                 <div class="countdown" id="countdown"></div>
             </div>
         </div>
@@ -314,6 +425,11 @@
         </div>
     </section>
 
+    <section class="final-cta">
+        <h2>Sẵn sàng đặt hàng ngay hôm nay?</h2>
+        <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-left">
@@ -340,6 +456,7 @@
 
     <div class="sticky-cta-bar">
         <button class="cta-button open-form-button">MUA NGAY – Giao tận nơi</button>
+                <div class="viewer-count">🟢 <span id="viewerNumber"></span> người đang xem sản phẩm này</div>
     </div>
 
      <div class="lightbox-overlay" id="video-lightbox">
@@ -389,7 +506,7 @@
         </div>
     </div>
     
-    <div class="toast" id="toast-notification">✅ Cảm ơn bạn đã đặt hàng!</div>
+    <div class="thankyou-modal" id="thankyou-modal"><div class="thankyou-content"><p>✅ Cảm ơn bạn đã đặt hàng thành công!</p><p>📞 Nhân viên của chúng tôi sẽ liên hệ xác nhận đơn hàng trong ít phút tới.</p><button onclick="closeThankyou()">Đóng</button></div></div>
 
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
@@ -440,52 +557,23 @@
             const flktyVideo = new Flickity(videoSlider, {
                 cellAlign: 'left',
                 contain: true,
-                groupCells: true, /* <-- ĐÃ THÊM DÒNG NÀY ĐỂ BẬT TÍNH NĂNG VUỐT */
+                groupCells: true,
                 pageDots: true,
                 prevNextButtons: true,
                 wrapAround: true
             });
 
-            // === Bắt đầu mã sửa lỗi vuốt video ===
+            // Đoạn mã này không còn cần thiết vì giải pháp viền trắng đã hiệu quả hơn.
+            // Tuy nhiên, để đó cũng không ảnh hưởng gì.
             const videoIFrames = videoSlider.querySelectorAll('.video-item');
-
             flktyVideo.on('dragStart', () => {
                 videoIFrames.forEach(iframe => {
                     iframe.classList.add('is-dragging');
                 });
             });
-
             flktyVideo.on('dragEnd', () => {
                 videoIFrames.forEach(iframe => {
                     iframe.classList.remove('is-dragging');
-                });
-            });
-            // === Kết thúc mã sửa lỗi vuốt video ===
-
-            const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-            const videos = document.querySelectorAll('.video-item');
-
-            videos.forEach(v => {
-                if (v.tagName === 'VIDEO') {
-                    if (!isMobile) {
-                        v.play().catch(()=>{});
-                    } else {
-                        v.addEventListener('click', () => {
-                            if (v.paused) v.play(); else v.pause();
-                        });
-                    }
-                }
-            });
-
-            flktyVideo.on('change', index => {
-                videos.forEach((v,i) => {
-                    if (v.tagName === 'VIDEO') {
-                        if (i === index && !isMobile) {
-                            v.play().catch(()=>{});
-                        } else {
-                            v.pause();
-                        }
-                    }
                 });
             });
         }
@@ -603,8 +691,27 @@
                 setTimeout(() => toast.classList.remove('show'), 4000);
                 submitButton.disabled = false;
                 submitButton.textContent = 'Xác nhận đặt hàng';
+                // Hiện popup cảm ơn
+                const modalTy = document.getElementById('thankyou-modal');
+                modalTy.style.display = 'flex';
+                setTimeout(() => { modalTy.style.display = 'none'; }, 4000);
+
             });
-        });
+        
+        // Viewer random
+        const viewerNumber = document.getElementById('viewerNumber');
+        function randomViewer(){
+            const num = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+            viewerNumber.textContent = num;
+        }
+        setInterval(randomViewer, 1000);
+        randomViewer();
+
+        // Đóng popup
+        function closeThankyou(){
+            document.getElementById('thankyou-modal').style.display = 'none';
+        }
+});
     });
     </script>
 </body>
