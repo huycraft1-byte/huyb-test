@@ -37,7 +37,7 @@
         .cta-button { display: inline-block; background-color: var(--color-primary); color: var(--color-light); font-size: 18px; font-weight: bold; text-align: center; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; width: 100%; transition: transform 0.2s, box-shadow 0.2s; }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(255, 77, 77, 0.4); }
         
-        /* === FINAL LAYOUT - TỈ LỆ 60/40 === */
+        /* === FINAL FONT-SIZE ADJUSTMENTS === */
 
         .top-bar-sticky {
             background-color: var(--color-primary);
@@ -45,7 +45,7 @@
             text-align: center;
             padding: 14px 10px;
             font-weight: bold;
-            font-size: 17px;
+            font-size: 18px; /* Tăng cỡ chữ top bar */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -75,21 +75,26 @@
                 flex-direction: row;
                 align-items: flex-start;
                 gap: 60px;
-                max-width: 1400px; /* Tăng chiều rộng tối đa */
+                max-width: 1400px;
                 width: 100%;
                 padding: 0; 
             }
-            /* CHIA TỈ LỆ 60% ẢNH - 40% TEXT */
             .product-gallery {
-                flex: 0 0 calc(60% - 30px); /* 60% trừ đi một nửa khoảng cách gap */
+                flex: 0 0 calc(60% - 30px);
                 max-width: calc(60% - 30px);
             }
             .product-info {
-                flex: 0 0 calc(40% - 30px); /* 40% trừ đi một nửa khoảng cách gap */
+                flex: 0 0 calc(40% - 30px);
                 max-width: calc(40% - 30px);
             }
-            .product-info h1 { font-size: 42px; }
-            .product-info .new-price { font-size: 38px; }
+            /* Tăng cỡ chữ các thành phần trong cột text */
+            .product-info h1 { font-size: 46px; }
+            .product-info .new-price { font-size: 42px; }
+            .hero-section .product-info .cta-button {
+                font-size: 22px;
+                padding: 18px 30px;
+            }
+            .usp-quick { font-size: 16px; }
         }
         
         .footer h3 { font-size: 22px; margin-bottom: 10px; }
